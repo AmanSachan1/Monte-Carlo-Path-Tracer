@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>655</width>
+    <height>610</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Path Tracer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="MyGL" name="mygl">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>618</width>
+          <height>432</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>631</width>
+          <height>121</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>631</width>
+          <height>121</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>Controls</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>611</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Square root of pixel samples count:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QSpinBox" name="samplesSpinBox">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Recursion limit:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QSpinBox" name="recursionSpinBox">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QCheckBox" name="checkBox_Progressive">
+            <property name="text">
+             <string>Progressive Preview</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Integrator type:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QComboBox" name="integratorSpinBox">
+            <item>
+             <property name="text">
+              <string>Full Lighting</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Photon Map Lighting</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Participating Media</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Direct Lighting</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Naive</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QCheckBox" name="checkBox_BVH">
+            <property name="text">
+             <string>Make BVH</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QSpinBox" name="spinBox_maxPrims">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>255</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Max primitives in node:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>655</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionRender"/>
+    <addaction name="actionLoad_Scene"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionCamera_Controls"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionLoad_Scene">
+   <property name="text">
+    <string>Load Scene</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+  </action>
+  <action name="actionRender">
+   <property name="text">
+    <string>Render</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionCamera_Controls">
+   <property name="text">
+    <string>Camera Controls</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyGL</class>
+   <extends>QOpenGLWidget</extends>
+   <header>mygl.h</header>
+   <slots>
+    <signal>sig_ResizeToCamera(int,int)</signal>
+    <signal>sig_DisableGUI(bool)</signal>
+    <slot>slot_SceneDialog()</slot>
+    <slot>slot_SetNumSamplesSqrt(int)</slot>
+    <slot>slot_SetRecursionLimit(int)</slot>
+    <slot>slot_SetProgressiveRender(bool)</slot>
+    <slot>slot_SetIntegratorType(int)</slot>
+    <slot>slot_UseBVH(bool)</slot>
+    <slot>slot_SetMaxBVHPrims(int)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>mygl</sender>
+   <signal>sig_ResizeToCamera(int,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_ResizeToCamera(int,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>182</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>32</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>samplesSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_SetNumSamplesSqrt(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>268</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>recursionSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_SetRecursionLimit(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>482</x>
+     <y>533</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>488</x>
+     <y>430</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_Progressive</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_SetProgressiveRender(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>247</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>integratorSpinBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_SetIntegratorType(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>249</x>
+     <y>565</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mygl</sender>
+   <signal>sig_DisableGUI(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_DisableGUI(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>454</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>491</x>
+     <y>567</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_BVH</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_UseBVH(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>626</x>
+     <y>563</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>604</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBox_maxPrims</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>mygl</receiver>
+   <slot>slot_SetMaxBVHPrims(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>434</x>
+     <y>571</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>443</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slot_ResizeToCamera(int,int)</slot>
+  <slot>slot_DisableGUI(bool)</slot>
+ </slots>
+</ui>

@@ -1,0 +1,66 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, 3, 0],
+        "eye" : [4.5, 3, -5],
+        "worldUp" : [0, 1, 0],
+        "fov" : 80,
+        "width" : 1024,
+        "height": 1024
+      },
+      "primitives" : [
+        {
+          "shape" : "Mesh",
+          "filename" : "StanfordDragon.obj",
+          "name" : "Draggo",
+          "material" : "perfectMirror",
+          "transform" : {
+            "translate" : [-2, 0, 2],
+            "rotate" : [10,-40,10],
+            "scale" : [0.9,0.9,0.9]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Environment Map",
+          "type" : "EnvironmentLight",
+          "transform" : {
+            "translate" : [0,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [0.001, 0.001, 0.001]
+          },
+          "intensity" : 1,
+          "texture": "tex_nor_maps/FrozenWaterfall.jpg"
+        }
+      ],
+      "materials" : [
+        {
+          "type": "MirrorMaterial",
+          "name": "chromeMirror",
+          "Kr": [1, 1, 1],
+          "roughness": 0.05
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "Stone",
+          "Kd" : [1,1,1],
+          "sigma": 0,
+          "textureMap" : "tex_nor_maps/stone.jpg",
+          "normalMap" : "tex_nor_maps/stoneN.jpg"
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "perfectMirror",
+          "Kr": [1, 1, 1],
+          "roughness": 0.0
+        }
+      ]
+    }
+  }
+]
+}

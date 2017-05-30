@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>include/complete.wav</file>
+    </qresource>
+</RCC>

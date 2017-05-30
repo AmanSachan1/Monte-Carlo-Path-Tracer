@@ -1,0 +1,135 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, -12, 20],
+        "eye" : [0, 48, 220],
+        "worldUp" : [0, 1, 0],
+        "fov" : 16,
+        "width" : 768,
+        "height": 512
+      },
+      "primitives" : [
+        {
+          "shape" : "SquarePlane",
+          "name" : "Glossy Plane Rough",
+          "material" : "glossyRough",
+          "transform" : {
+            "translate" : [0,-31.2,28.4],
+            "rotate" : [-78,0,0],
+            "scale" : [80, 8, 1]
+          }
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Glossy Plane Medium",
+          "material" : "glossyMedium",
+          "transform" : {
+            "translate" : [0,-28.672,17.848],
+            "rotate" : [-73,0,0],
+            "scale" : [80, 8, 1]
+          }
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Glossy Plane Smooth",
+          "material" : "glossySmooth",
+          "transform" : {
+            "translate" : [0,-24.496,7.368],
+            "rotate" : [-63,0,0],
+            "scale" : [80, 8, 1]
+          }
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Glossy Plane SuperSmooth",
+          "material" : "glossySuper",
+          "transform" : {
+            "translate" : [0,-19.16, -1.08],
+            "rotate" : [-51.5,0,0],
+            "scale" : [80, 8, 1]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Light Small",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [1,1,1],
+          "intensity" : 96,
+          "transform" : {
+            "translate" : [-28,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [1, 1, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : false
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Light Medium",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [1,1,1],
+          "intensity" : 48,
+          "transform" : {
+            "translate" : [0,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [4, 4, 4]
+          },
+          "isDelta" : false,
+          "twoSided" : false
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Light Large",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [1,1,1],
+          "intensity" : 48,
+          "transform" : {
+            "translate" : [28,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [8, 8, 8]
+          },
+          "isDelta" : false,
+          "twoSided" : false
+        }
+      ],
+      "materials" : [
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteWhite",
+            "Kd" : [0.85, 0.81, 0.78],
+          "sigma": 0
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "glossySmooth",
+          "Kr": [0.75, 1, 0.85],
+          "roughness": 0.05
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "glossyMedium",
+          "Kr": [1, 1, 0.7],
+          "roughness": 0.1
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "glossyRough",
+          "Kr": [1, 0.79, 0.75],
+          "roughness": 0.25
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "glossySuper",
+          "Kr": [0.78, 0.67, 0.95],
+          "roughness": 0.01
+        }
+      ]
+    }
+  }
+]
+}

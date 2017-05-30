@@ -1,0 +1,44 @@
+[Header]
+ICOfile = "Frozen_Waterfall_Thumb.jpg"
+PREVIEWfile = "Frozen_Waterfall_preview.jpg"
+Name = "Frozen Waterfall"
+Author = "Blochi"
+Location = "California"
+Comment = "very bright morning sky, shining through large trees"
+GEOlat = 36.56204851728762
+GEOlong = -118.27537536621094
+Link = "http://www.hdrlabs.com/sibl/archive.html"
+Date = "2006:11:25"
+Time = "07:25:00"
+Height = 1.4
+North = 0.6
+
+[Background]
+;tonemapped for detail and nice colors
+BGfile = "Frozen_Waterfall_HiRes_TMap.jpg"
+BGmap = 1
+BGu = 0.000000
+BGv = 0.000000
+BGheight = 4000
+
+[Enviroment]
+;this might be plenty of light
+EVfile = "Frozen_Waterfall_Env.hdr"
+EVmap = 1
+EVu = 0.000000
+EVv = 0.000000
+EVheight = 180
+EVmulti = 1.000000
+EVgamma = 1.600000
+
+[Reflection]
+;less saturated colors than background
+REFfile = "Frozen_Waterfall_Ref.hdr"
+REFmap = 1
+REFu = 0.000000
+REFv = 0.000000
+REFheight = 800
+REFmulti = 1.000000
+REFgamma = 1.600000
+
+

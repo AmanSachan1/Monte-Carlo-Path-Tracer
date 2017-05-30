@@ -1,0 +1,387 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, 10, 3],
+        "eye" : [10, 3, -25],
+        "worldUp" : [0, 1, 0],
+        "fov" : 35,
+        "width" : 512,
+        "height": 512
+      },
+      "primitives" : [
+        {
+          "shape" : "SquarePlane",
+          "name" : "Back Wall",
+          "material" : "Stone",
+          "transform" : {
+            "translate" : [-5, 15, 20],
+            "rotate" : [0, 0, 90],
+            "scale" : [50, 50, 1]
+          }
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Floor",
+          "material" : "Stone",
+          "transform" : {
+            "translate" : [0, 1, 5],
+            "rotate" : [-90, 0, 0],
+            "scale" : [100, 100, 1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "glass",
+          "material" : "glass",
+          "transform" : {
+            "translate" : [0,10, 0],
+            "rotate" : [45,50,180],
+            "scale" : [7,7,7]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [8, 3, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [8, 5, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [0,7,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower5",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 3, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop5",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 5, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb5",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [6, 7, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower6",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 3, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop6",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 5, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb6",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [-6, 7, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower7",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 3, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop7",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 5, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb7",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [6, 7, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower8",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 3, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop8",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 5, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb8",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [-6, 7, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower2",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,3,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop2",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,5,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb2",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [8, 7, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower3",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-8, 3, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop3",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-8,5,0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb3",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [-8, 7, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower4",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,3,-8],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop4",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,5,-8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb4",
+          "material" : "chromeMirror",
+          "transform" : {
+            "translate" : [0, 7, -8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "SquarePlane",
+          "name" : "Top",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [0.5,0.5,0.5],
+          "intensity" : 4,
+          "transform" : {
+            "translate" : [0,25,0],
+            "rotate" : [90,0,0],
+            "scale" : [15,15, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Left",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [0.4,0.39,0.9],
+          "intensity" : 3,
+          "transform" : {
+            "translate" : [20,5,0],
+            "rotate" : [0,90,0],
+            "scale" : [10, 10, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Right",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [0.63,0.01,0.87],
+          "intensity" : 3,
+          "transform" : {
+            "translate" : [-20,5,0],
+            "rotate" : [0,90,0],
+            "scale" : [10, 10, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        }
+      ],
+      "materials" : [
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteWhite",
+          "Kd" : [0.85, 0.81, 0.78],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteRed",
+          "Kd" : [0.63, 0.065, 0.05],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteGreen",
+          "Kd" : [0.3, 0.8, 0.2],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteBlack",
+          "Kd" : [0,0,0],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "Stone",
+          "Kd" : [1,1,1],
+          "sigma": 0,
+          "textureMap" : "tex_nor_maps/stone.jpg",
+          "normalMap" : "tex_nor_maps/stoneN.jpg"
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "Rubiks",
+          "Kd" : [1,1,1],
+          "sigma": 0,
+          "textureMap" : "tex_nor_maps/rubikscube.jpg"
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "chromeMirror",
+          "Kr": [1, 1, 1],
+          "roughness": 0.05
+        },
+        {
+          "type" : "GlassMaterial",
+          "name" : "glass",
+          "Kt": [1,1,1],
+          "Kr" : [1,1,1],
+          "eta": 1.55
+        }
+      ]
+    }
+  }
+]
+}

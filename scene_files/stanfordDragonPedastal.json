@@ -1,0 +1,368 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [-0.5, 3, 3],
+        "eye" : [9.5, 28, -30],
+        "worldUp" : [0, 1, 0],
+        "fov" : 70,
+        "width" : 1024,
+        "height": 1024
+      },
+      "primitives" : [
+        {
+          "shape" : "Mesh",
+          "filename" : "StanfordDragon.obj",
+          "name" : "Draggo",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0, 5, 0],
+            "rotate" : [10,-40,10],
+            "scale" : [0.9,0.9,0.9]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [8, 3, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [8, 5, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [0,7,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower5",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 3, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop5",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 5, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb5",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [6, 7, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower6",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 3, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop6",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 5, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb6",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [-6, 7, -6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower7",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 3, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop7",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [6, 5, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb7",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [6, 7, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower8",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 3, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop8",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-6, 5, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb8",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [-6, 7, 6],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower2",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,3,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop2",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,5,8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb2",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [8, 7, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower3",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-8, 3, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop3",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-8,5,0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb3",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [-8, 7, 0],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Tower4",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,3,-8],
+            "rotate" : [0, 0, 0],
+            "scale" : [1,4,1]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "TowerTop4",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0,5,-8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,0.5,2]
+          }
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Orb4",
+          "material" : "transmissive",
+          "transform" : {
+            "translate" : [0, 7, -8],
+            "rotate" : [0, 0, 0],
+            "scale" : [2,2,2]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Environment Map",
+          "type" : "EnvironmentLight",
+          "transform" : {
+            "translate" : [0,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [0.001, 0.001, 0.001]
+          },
+          "intensity" : 0.5,
+          "texture": "tex_nor_maps/FrozenWaterfall.jpg"
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Top",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [6,15,6],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [0,7,-20],
+            "rotate" : [0,90,0],
+            "scale" : [2, 2, 2]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Back",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [6,15,6],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [0,7,20],
+            "rotate" : [0,90,0],
+            "scale" : [2, 2, 2]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Right",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [4,12,17],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [-22,7,0],
+            "rotate" : [90,0,0],
+            "scale" : [2, 2, 2]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "Sphere",
+          "name" : "Left",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [6,15,6],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [22,7,0],
+            "rotate" : [0,90,0],
+            "scale" : [2, 2, 2]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        }
+      ],
+      "materials" : [
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteWhite",
+          "Kd" : [0.85, 0.81, 0.78],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "Stone",
+          "Kd" : [1,1,1],
+          "sigma": 0,
+          "textureMap" : "tex_nor_maps/stone.jpg",
+          "normalMap" : "tex_nor_maps/stoneN.jpg"
+        },
+        {
+          "type": "MirrorMaterial",
+          "name": "perfectMirror",
+          "Kr": [1, 1, 1],
+          "roughness": 0.0
+        },
+        {
+          "type" : "TransmissiveMaterial",
+          "name" : "transmissive",
+          "Kt": [0.7, 1, 0.7],
+          "eta": 1.3
+        }
+      ]
+    }
+  }
+]
+}

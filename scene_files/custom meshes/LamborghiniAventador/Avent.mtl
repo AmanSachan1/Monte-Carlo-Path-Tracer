@@ -1,0 +1,202 @@
+# MTL written from /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador/Aventador/Avent.obj
+newmtl BREMSE1
+Kd 0.435294 0.435294 0.435294
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl BREMSE2
+Kd 0.258824 0.258824 0.258824
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl Body
+Kd 0.296296 0.0143919 0
+Ns 1024
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.00474119 0.00478012 0.00495
+newmtl FELGE1
+Kd 0.211411 0.211411 0.211411
+Ns 64
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.06 0.06 0.06
+newmtl FrontColor
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl Glass
+Kd 0 0 0
+Ns 2048
+d 0.2
+illum 2
+Ka 0 0 0
+Ks 0.75 0.75 0.75
+newmtl LICHTER1
+Kd 0.8 0.8 0.8
+Ns 256
+d 1
+illum 2
+Ka 1 1 1
+Ks 0.33 0.33 0.33
+newmtl LICHTER2
+Kd 1 0 0
+Ns 256
+d 1
+illum 2
+Ka 0.6 0 0
+Ks 0.33 0.33 0.33
+newmtl LICHTER3
+Kd 0.0849673 0.0849673 0.0849673
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl LICHTER4
+Kd 1 1 1
+Ns 256
+d 0.46
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl LICHTER5
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl Lambo_045black
+Kd 0 0 0
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+newmtl Lambo_045yellow
+Kd 0.3 0.192499 0.0347054
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.2 0.2 0.2
+newmtl MOTOR1
+Kd 0.215686 0.215686 0.215686
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl Mirror
+Kd 0 0 0
+Ns 2048
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.9 0.9 0.9
+newmtl REIFEN1
+Kd 0 0 0
+Ns 11.3137
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.01 0.01 0.01
+newmtl TEILE1
+Kd 0 0 0
+Ns 2048
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.03 0.03 0.03
+newmtl TEILE2
+Kd 0.607843 0.607843 0.607843
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl TEILE3
+Kd 0.65098 0.65098 0.65098
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl TEILE4
+Kd 0.172549 0.172549 0.172549
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl Translucent_Glass_Gray
+Kd 0 0 0
+Ns 256
+d 0.47
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl UNTERBODEN
+Kd 0.172549 0.172549 0.172549
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl _Black_
+Kd 0 0 0
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.33 0.33 0.33
+newmtl interior
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.05 0.05 0.05
+map_Kd /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador/Aventador interior/interior_lod0.tga
+newmtl lines
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 1 1 1
+Ks 0.05 0.05 0.05
+newmtl logo
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.05 0.05 0.05
+map_Kd /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador/Aventador interior/interior_lod0.tga
+newmtl signs
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.05 0.05 0.05
+map_Kd /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador/Aventador interior/interior_lod0.tga
+newmtl speedometer
+Kd 1 1 1
+Ns 256
+d 1
+illum 2
+Ka 0 0 0
+Ks 0.05 0.05 0.05
+map_Kd /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador Hi-Poly [Squir]/aventador-new/gaudges.jpg
+map_Ka /Users/manapoly/Desktop/Yusup/Models/Land/Lamborghini/Aventador Hi-Poly [Squir]/aventador-new/gaudges.jpg

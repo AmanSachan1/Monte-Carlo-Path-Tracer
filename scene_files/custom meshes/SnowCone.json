@@ -1,0 +1,119 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, 2.5, 0],
+        "eye" : [0, 5.5, -30],
+        "worldUp" : [0, 1, 0],
+        "fov" : 19.5,
+        "width" : 512,
+        "height": 512
+      },
+      "primitives" : [
+        {
+          "shape" : "SquarePlane",
+          "name" : "Floor",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [0, 0.5, -9.35],
+            "rotate" : [-90, 0, 0],
+            "scale" : [20, 10, 10]
+          }
+        },        
+        {
+          "shape" : "Mesh",
+          "name" : "Dome Backdrop",
+          "filename": "\\DomeThingy.obj",
+          "material" : "matteDome",
+          "transform" : {
+            "translate" : [44.4, 1.4, -9.35],
+            "rotate" : [0, 180, 0],
+            "scale" : [1, 1, 1]
+          }
+        },
+        {
+          "shape" : "Mesh",
+          "name" : "SnowCone",
+          "filename": "\\SnowCone.obj",
+          "material" : "matteGrey",
+          "transform" : {
+            "translate" : [-23, -19, -9.35],
+            "rotate" : [0, 0, 40],
+            "scale" : [1, 1, 1]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "SquarePlane",
+          "name" : "Light Source Yellow",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [17,12,4],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [2,7,-10],
+            "rotate" : [90,-10,0],
+            "scale" : [3, 3, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        },
+        {
+          "shape" : "SquarePlane",
+          "name" : "Light Source Blue",
+          "type" : "DiffuseAreaLight",
+          "lightColor" : [4,12,17],
+          "intensity" : 1,
+          "transform" : {
+            "translate" : [-2,7,-10],
+            "rotate" : [90,10,0],
+            "scale" : [3, 3, 1]
+          },
+          "isDelta" : false,
+          "twoSided" : true
+        }
+      ],
+      "materials" : [
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteWhite",
+            "Kd" : [0.85, 0.81, 0.78],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteDome",
+          "Kd" : [0.24, 0.67, 1.0],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteRed",
+          "Kd" : [0.63, 0.065, 0.05],
+          "sigma": 0
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteGrey",
+          "Kd" : [0.45, 0.45, 0.45],
+          "sigma": 0
+        },
+        {
+          "type": "TransmissiveMaterial",
+          "name": "transmissiveMaterial",
+          "Kt": [0.7, 1, 0.7],
+          "eta": 1.3
+        },
+        {
+          "type": "MatteMaterial",
+          "name": "texturedMaterial",
+          "Kd": [1, 1, 1],
+          "textureMap": "tex_nor_maps/whitebubble.jpg"
+        }
+      ]
+    }
+  }
+]
+}

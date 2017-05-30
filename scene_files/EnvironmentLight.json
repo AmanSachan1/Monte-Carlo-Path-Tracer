@@ -1,0 +1,50 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, 2.5, 0],
+        "eye" : [0, 5.5, -30],
+        "worldUp" : [0, 1, 0],
+        "fov" : 19.5,
+        "width" : 512,
+        "height": 512
+      },
+      "primitives" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Sphere",
+          "material" : "perfectMirror",
+          "transform" : {
+            "translate" : [0, 3.7, -10],
+            "rotate" : [0,0,0],
+            "scale" : [1.8, 1.8, 1.8]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Environment Map",
+          "type" : "EnvironmentLight",
+          "transform" : {
+            "translate" : [0,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [0.001, 0.001, 0.001]
+          },
+          "intensity" : 1,
+          "texture": "tex_nor_maps/GalaxyHDR2.jpg"
+        }
+      ],
+      "materials" : [
+        {
+          "type": "MirrorMaterial",
+          "name": "perfectMirror",
+          "Kr": [1, 1, 1]
+        }
+      ]
+    }
+  }
+]
+}
