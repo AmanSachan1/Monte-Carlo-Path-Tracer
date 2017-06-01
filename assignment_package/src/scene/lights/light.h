@@ -29,7 +29,6 @@ class Light
 
     QString name; // For debugging
     bool flag_infiniteLight;
-//  protected:
     const Transform transform;
 };
 

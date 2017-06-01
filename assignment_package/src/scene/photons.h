@@ -23,18 +23,27 @@ struct Photon
 
 class Scene;
 
-class Photons
+class Photons: public QRunnable
 {
 public:
     Photons(Scene* s, std::shared_ptr<Sampler> sampler, int recursionLimit)
         : scene(s), sampler(sampler), recursionLimit(recursionLimit)
     {}
 
-    ~Photons() {}
+    virtual ~Photons() {}
+
+    virtual void run(); // A function declared in the QRunnable class that we must implement
+                        // in order for our class to be compatible with a QThreadPool.
+    virtual void shoot(); //Called from run() for multi threading
 
     KdTree* createTree(KdTree* root);
     void shootPhotons();
-    void shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sampler, int depth);
+    void shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sampler,
+                            int depth, Ray& ray,  int &lightIndex,
+                            std::vector<Photon>threadPhotonsDirect,
+                            std::vector<Photon> threadPhotonsIndirect,
+                            std::vector<Photon> threadPhotonsCaustic);
+    bool RussianRoulette(Color3f& energy, float probability, int depth) const;
     KdTree* constructTree(KdTree* root);
 
 protected:
@@ -42,6 +51,8 @@ protected:
     std::shared_ptr<Sampler> sampler;       // A pointer to the Sampler that we will use to generate pixel samples for this thread.
 
     int recursionLimit;
-    std::vector<Photon> photonList;
+    std::vector<Photon> photonListDirect;
+    std::vector<Photon> photonListIndirect;
+    std::vector<Photon> photonListCaustic;
     int numPhotons=0;
 };
