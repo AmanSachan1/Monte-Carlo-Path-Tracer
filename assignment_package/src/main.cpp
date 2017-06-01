@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 #include <QDebug>
+#include <QFile>
 
 void debugFormatVersion()
 {
@@ -22,6 +23,11 @@ void debugFormatVersion()
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile stylesheetFile("darkorange.qss");
+    stylesheetFile.open(QFile::ReadOnly);
+    QString StyleSheet = QLatin1String(stylesheetFile.readAll());
+    a.setStyleSheet(StyleSheet);
 
     // Set OpenGL 3.2 and, optionally, 4-sample multisampling
     QSurfaceFormat format;

@@ -14,7 +14,8 @@ FORMS += forms/mainwindow.ui \
     forms/cameracontrolshelp.ui
 
 RESOURCES += glsl.qrc \
-    sfx.qrc
+    sfx.qrc \
+    darkorange.qrc
 
 
 # Enable console on Windows so that we can actually see debug prints.
@@ -57,3 +58,7 @@ address_sanitizer {
 HEADERS +=
 
 SOURCES +=
+
+DISTFILES += \
+    __init__.py \
+    darkorange.py

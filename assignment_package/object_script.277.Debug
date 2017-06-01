@@ -60,6 +60,7 @@ INPUT(
 ./debug\photons.o
 ./debug\qrc_glsl.o
 ./debug\qrc_sfx.o
+./debug\qrc_darkorange.o
 ./debug\moc_mainwindow.o
 ./debug\moc_mygl.o
 ./debug\moc_glwidget277.o

@@ -60,6 +60,7 @@ INPUT(
 ./release\photons.o
 ./release\qrc_glsl.o
 ./release\qrc_sfx.o
+./release\qrc_darkorange.o
 ./release\moc_mainwindow.o
 ./release\moc_mygl.o
 ./release\moc_glwidget277.o
