@@ -14,6 +14,11 @@ Color3f EnvironmentLight::Sample_Li(const Intersection &ref, const Point2f &xi,
     return lightColor*intensity;
 }
 
+Color3f EnvironmentLight::LightEmitted() const
+{
+    return emittedLight;
+}
+
 float EnvironmentLight::Pdf_Li(const Intersection &ref, const Vector3f &wi) const
 {
     return 1.0f;

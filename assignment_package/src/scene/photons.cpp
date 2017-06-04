@@ -13,8 +13,6 @@ KdTree* Photons::createTree(KdTree* root)
 
 void Photons::shootPhotons()
 {
-
-
     for(int j=0; j<100; j++) //done to make it easy to convert to a parallel structure
     {
         //for every thread that is created, store the photons it is processing in a
@@ -72,6 +70,9 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
 
     while( depth > 0 && !flag_Terminate)
     {
+        //Photons are added to their respective maps as they hit surfaces, disregarding the first intersection with the scene
+        //Direct Lighting is handled in the actual integrator as you will get better results (its easier and less biased to do BSDF based
+        //direct lighting and then MIS)
         float probability = sampler->Get1D(); //russian roulette random number
         Color3f directLightingColor = Color3f(0.0);
 
@@ -92,13 +93,6 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
             return;
         }
 
-        if( depth == recursionLimit  || flag_CameFromSpecular )
-        {
-//            directLightingColor += intersection.Le(woW);
-            //use light index to get Le
-            //create a photon and add it to the Direct Light Map
-        }
-
         intersection.ProduceBSDF();
         int randomLightIndex = -1;
 
@@ -106,18 +100,7 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
 
         //Direct Lighting
 
-//        Vector3f wiW_Direct_Light;
-//        float pdf_Direct_Light;
-//        Point2f xi_Direct_Light = sampler->Get2D();
-//        Color3f LTE_Direct_Light = Color3f(0.0f);
-
         //BSDF based Direct Lighting
-//        Vector3f wiW_BSDF_Light;
-//        float pdf_BSDF_Light;
-//        Point2f xi_BSDF_Light = sampler->Get2D();
-//        Color3f LTE_BSDF_Light = Color3f(0.0f);
-        BxDFType sampledType;
-//        int randomLightIndex_bsdf = -1;
 
         //MIS
 
@@ -125,11 +108,37 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
         Vector3f wiW_BSDF_Indirect;
         float pdf_BSDF_Indirect;
         Point2f xi_BSDF_Indirect = sampler->Get2D();
+        BxDFType sampledType;
+
+        if( depth == recursionLimit )
+        {
+            directLightingColor += scene.lights.at(lightIndex)->LightEmitted();
+
+            //Since this is the first intersection with the scene of a photon shot froma light source. It is the
+            //equivalent of direct lighting, however we are handling direct lighting in the integrator. So we
+            //skip the first bounce.
+
+            intersection.bsdf->Sample_f(woW, &wiW_BSDF_Indirect, xi_BSDF_Indirect,
+                                        &pdf_BSDF_Indirect, BSDF_ALL, &sampledType);
+
+            Ray ray_skipfirstbounce = intersection.SpawnRay(wiW_BSDF_Indirect);
+            woW = -ray_skipfirstbounce.direction;
+            r = ray_skipfirstbounce;
+            depth--;
+            continue;
+        }
 
         flag_CameFromSpecular = false;
         if(flag_Hit_Specular) //if( (sampledType & BSDF_SPECULAR) == BSDF_SPECULAR )
         {
             flag_CameFromSpecular = true;
+        }
+        flag_Hit_Specular = false; // comment out to strengthen the effect of caustics
+
+        if( (intersection.bsdf->BxDFsMatchingFlags(BSDF_SPECULAR) == 1) &&
+            (intersection.bsdf->BxDFsMatchingFlags(BSDF_ALL) == 1)         )
+        {
+            flag_Hit_Specular = true;
         }
 
         directLightingColor *= accumulatedThroughputColor;

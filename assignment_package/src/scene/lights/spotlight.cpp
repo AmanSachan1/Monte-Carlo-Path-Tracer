@@ -9,6 +9,11 @@ Color3f Spotlight::Sample_Li(const Intersection &ref, const Point2f &xi,
     return emittedLight*Falloff(-*wi)/glm::distance2(pLight, ref.point);
 }
 
+Color3f Spotlight::LightEmitted() const
+{
+    return emittedLight;
+}
+
 float Spotlight::Falloff(const Vector3f &w) const
 {
     Vector3f wl = glm::normalize( glm::vec3(transform.invT() * glm::vec4(w, 0.0f)) );

@@ -9,6 +9,11 @@ Color3f DirectionalLight::Sample_Li(const Intersection &ref, const Point2f &xi,
     return emittedLight;
 }
 
+Color3f DirectionalLight::LightEmitted() const
+{
+    return emittedLight;
+}
+
 float DirectionalLight::Pdf_Li(const Intersection &ref, const Vector3f &wi) const
 {
     return 0.0f;

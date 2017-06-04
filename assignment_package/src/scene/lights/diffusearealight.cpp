@@ -12,6 +12,11 @@ Color3f DiffuseAreaLight::L(const Intersection &isect, const Vector3f &w) const
     }
 }
 
+Color3f DiffuseAreaLight::LightEmitted() const
+{
+    return emittedLight;
+}
+
 Color3f DiffuseAreaLight::Sample_Li(const Intersection &ref, const Point2f &xi,
                                      Vector3f *wi, Float *pdf) const
 {

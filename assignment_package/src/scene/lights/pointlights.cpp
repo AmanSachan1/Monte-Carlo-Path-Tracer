@@ -11,6 +11,11 @@ Color3f PointLight::Sample_Li(const Intersection &ref, const Point2f &xi,
     return emittedLight/glm::distance2(pLight, ref.point);
 }
 
+Color3f PointLight::LightEmitted() const
+{
+    return emittedLight;
+}
+
 float PointLight::Pdf_Li(const Intersection &ref, const Vector3f &wi) const
 {
     return 0.0f;
