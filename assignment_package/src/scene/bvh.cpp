@@ -99,8 +99,6 @@ BVHAccel::BVHAccel(const std::vector<std::shared_ptr<Primitive> > &p, int maxPri
 
         l = primitiveBounds.size() - 1;
 
-
-
         centroid.push_back( glm::vec3((primitiveBounds[l].min.x + primitiveBounds[l].max.x)/2.0f,
                                       (primitiveBounds[l].min.y + primitiveBounds[l].max.y)/2.0f,
                                       (primitiveBounds[l].min.z + primitiveBounds[l].max.z)/2.0f) );

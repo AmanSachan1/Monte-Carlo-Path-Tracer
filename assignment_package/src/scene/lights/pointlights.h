@@ -16,6 +16,8 @@ public:
      virtual Color3f L(const Intersection &isect, const Vector3f &w) const;
      virtual float Pdf_Li(const Intersection &ref, const Vector3f &wi) const;
 
+    Color3f LightEmitted() const;
+
      // Member variables
      const Color3f emittedLight;
      const Point3f pLight;

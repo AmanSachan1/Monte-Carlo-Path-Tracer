@@ -5,10 +5,11 @@ void Photons::run()
     shoot(); //using a proxy function to be able to easily debug by simply calling shoot instead of run
 }
 
-KdTree* Photons::createTree(KdTree* root)
+KdNode* Photons::createTree()
 {
     shootPhotons();
-    constructTree(root);
+    KdTree* kdtree = new KdTree(scene, photonListIndirect, photonListCaustic);
+    KdNode* root = kdtree->root;
 }
 
 void Photons::shootPhotons()
@@ -23,9 +24,9 @@ void Photons::shootPhotons()
 
 void Photons::shoot()
 {
-    std::vector<Photon> threadPhotonListDirect;
-    std::vector<Photon> threadPhotonListIndirect;
-    std::vector<Photon> threadPhotonListCaustic;
+    std::vector<Photon*> threadPhotonListDirect;
+    std::vector<Photon*> threadPhotonListIndirect;
+    std::vector<Photon*> threadPhotonListCaustic;
 
     int numLights = scene->lights.size();
     int n1 = numPhotons/numLights;
@@ -37,6 +38,7 @@ void Photons::shoot()
 
     for(int i=0; i<numLights; i++)
     {
+        float alpha = scene->lights.at(i)->LightEmitted().length();//confirm with adam
         for(int k=0; i<n2; i++)
         {
             //use warp functions to generate a ray from the light into the scene
@@ -44,19 +46,22 @@ void Photons::shoot()
             Vector3f origin = Vector3f(0.0f);
             Vector3f dir = Vector3f(0.0f);
             Ray ray = Ray(origin, dir);
-            shootPhotonsHelper(*scene, sampler, recursionLimit, ray, i,
+            shootPhotonsHelper(*scene, sampler, recursionLimit, ray, i, alpha,
                                threadPhotonListDirect,
                                threadPhotonListIndirect,
                                threadPhotonListCaustic);
         }
     }
+
+    photonListIndirect.push_back(threadPhotonListIndirect);
+    photonListCaustic.push_back(threadPhotonListCaustic);
 }
 
 void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sampler,
-                                 int depth, Ray& ray, int& lightIndex,
-                                 std::vector<Photon>threadPhotonsDirect,
-                                 std::vector<Photon>threadPhotonsIndirect,
-                                 std::vector<Photon>threadPhotonsCaustic )
+                                 int depth, Ray& ray, int& lightIndex, float alpha,
+                                 std::vector<Photon*>threadPhotonsDirect,
+                                 std::vector<Photon*>threadPhotonsIndirect,
+                                 std::vector<Photon*>threadPhotonsCaustic )
 {
     Color3f accumulatedRayColor = Color3f(0.0f); //accumulated ray color
     Color3f accumulatedThroughputColor = Color3f(1.0f); //accumulated throughput color
@@ -64,8 +69,8 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
     //keep track of energy and ray globally
     Vector3f woW = -ray.direction;
     bool flag_Terminate = false;
-    bool flag_CameFromSpecular = false;
-    bool flag_Hit_Specular = false;
+    bool flag_CameFromCausticProducer = false;
+    bool flag_Hit_CausticProducer = false;
     Ray r = ray;
 
     while( depth > 0 && !flag_Terminate)
@@ -96,14 +101,6 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
         intersection.ProduceBSDF();
         int randomLightIndex = -1;
 
-        //Add photon creation bits using existing information
-
-        //Direct Lighting
-
-        //BSDF based Direct Lighting
-
-        //MIS
-
         //Indirect Lighting
         Vector3f wiW_BSDF_Indirect;
         float pdf_BSDF_Indirect;
@@ -128,17 +125,17 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
             continue;
         }
 
-        flag_CameFromSpecular = false;
-        if(flag_Hit_Specular) //if( (sampledType & BSDF_SPECULAR) == BSDF_SPECULAR )
+        flag_CameFromCausticProducer = false;
+        if(flag_Hit_CausticProducer) //if( (sampledType & BSDF_SPECULAR) == BSDF_SPECULAR )
         {
-            flag_CameFromSpecular = true;
+            flag_CameFromCausticProducer = true;
         }
-        flag_Hit_Specular = false; // comment out to strengthen the effect of caustics
+        flag_Hit_CausticProducer = false; // comment out to strengthen the effect of caustics
 
         if( (intersection.bsdf->BxDFsMatchingFlags(BSDF_SPECULAR) == 1) &&
             (intersection.bsdf->BxDFsMatchingFlags(BSDF_ALL) == 1)         )
         {
-            flag_Hit_Specular = true;
+            flag_Hit_CausticProducer = true;
         }
 
         directLightingColor *= accumulatedThroughputColor;
@@ -160,6 +157,17 @@ void Photons::shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sa
 
         flag_Terminate = RussianRoulette(accumulatedThroughputColor, probability, depth); //can change accumulatedThroughput
         accumulatedRayColor += directLightingColor;
+
+        if(!flag_Hit_CausticProducer && flag_CameFromCausticProducer)
+        {
+            //store photon in caustic map
+            Photon* p = new Photon(intersection.point, woW, alpha, accumulatedRayColor);
+            threadPhotonsCaustic.push_back(p);
+        }
+
+        //store photon in diffuse map
+        Photon* p = new Photon(intersection.point, woW, alpha, accumulatedRayColor);
+        threadPhotonsIndirect.push_back(p);
 
         Ray n_ray_BSDF_Indirect = intersection.SpawnRay(wiW_BSDF_Indirect);
         woW = -n_ray_BSDF_Indirect.direction;
@@ -184,7 +192,7 @@ bool Photons::RussianRoulette(Color3f& energy, float probability, int depth) con
     return false;
 }
 
-KdTree* Photons::constructTree(KdTree* root)
-{
+//KdTree* Photons::constructTree(KdTree* root)
+//{
 
-}
+//}
