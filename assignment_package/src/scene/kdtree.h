@@ -6,11 +6,13 @@
 // Forward declarations of structs used by our kd tree
 // They are defined in the .cpp file
 struct KdNode;
+class Scene;
+class Photon;
 
 class KdTree
 {
 public:
-    KdTree(Scene &scene, std::vector<std::vector<Photon*>> indirectMap, std::vector<std::vector<Photon*>> CausticMap);
+    KdTree(const Scene &scene, std::vector<std::vector<Photon*>*> &indirectMap, std::vector<std::vector<Photon*>*> &causticMap);
 
     void constructHelper( glm::vec3 bv_min, glm::vec3 bv_max,
                           KdTree* parent_node, int& depth,

@@ -12,7 +12,7 @@ struct KdNode
 };
 
 
-KdTree::KdTree(Scene& scene, std::vector<std::vector<Photon*>> indirectMap, std::vector<std::vector<Photon*>> CausticMap )
+KdTree::KdTree(const Scene &scene, std::vector<std::vector<Photon *> *> &indirectMap, std::vector<std::vector<Photon *> *> &causticMap )
 {
     QTime timer = QTime();
     timer.start();
@@ -22,16 +22,16 @@ KdTree::KdTree(Scene& scene, std::vector<std::vector<Photon*>> indirectMap, std:
 
     for(int i=0; i<indirectMap.size(); i++)
     {
-        for(int j=0; j<indirectMap[i].size(); j++)
+        for(int j=0; j<indirectMap[i]->size(); j++)
         {
-            node->nodePhotons.push_back(indirectMap[i][j]);
+            node->nodePhotons.push_back((*indirectMap[i])[j]);
         }
     }
     for(int i=0; i<causticMap.size(); i++)
     {
-        for(int j=0; j<causticMap[i].size(); j++)
+        for(int j=0; j<causticMap[i]->size(); j++)
         {
-            node->nodePhotons.push_back(indirectMap[i][j]);
+            node->nodePhotons.push_back((*indirectMap[i])[j]);
         }
     }
 
