@@ -133,7 +133,7 @@ void BVHAccel::constructHelper( glm::vec3 bv_min,
     BVHNode* node1 = new BVHNode();
     BVHNode* node2 = new BVHNode();
 
-    //find the longest axis and use 7 dividing lines(8 buckets) to compare the surface areas around
+    //find the longest axis and use 12 dividing lines(13 buckets) to compare the surface areas around
     Bounds3f tmpCB(bv_min, bv_max);
     int longest_axis = tmpCB.MaximumExtent();
 
@@ -178,7 +178,8 @@ void BVHAccel::constructHelper( glm::vec3 bv_min,
 
     float minCost = std::numeric_limits<Float>::infinity();
     int minCostSplitLine = -1;
-    for( int i=1; i<nSegments; i++ )
+    for( int i=1; i<nSegments; i++ ) //Does there need to be a i-1 in the loop
+                                     //CHECK LOGIC, THIS MAY BE A STUPID THING
     {
         if( cost[i-1] < minCost )
         {
@@ -308,7 +309,7 @@ void BVHAccel::constructHelper( glm::vec3 bv_min,
 
         if( flag )
         {
-            count++;
+            count++; //NOT SURE WHAT PURPOSE THIS SERVES
         }
 
         return;

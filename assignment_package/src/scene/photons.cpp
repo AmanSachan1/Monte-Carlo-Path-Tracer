@@ -53,7 +53,8 @@ void Photons::shoot()
         }
     }
 
-    //May want to look at thread safe functions
+    //May want to look at thread safe functions --> they can prevent 2 threads
+    //from writing to the same photonList
     photonListIndirect.push_back(threadPhotonListIndirect);
     photonListCaustic.push_back(threadPhotonListCaustic);
 }
@@ -193,8 +194,3 @@ bool Photons::RussianRoulette(Color3f& energy, float probability, int depth) con
 
     return false;
 }
-
-//KdTree* Photons::constructTree(KdTree* root)
-//{
-
-//}

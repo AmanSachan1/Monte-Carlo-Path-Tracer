@@ -6,9 +6,17 @@ struct KdNode
     KdNode( Bounds3f bounds): bounds(bounds) {}
 
     Bounds3f bounds; // for the bounding box
-    std::vector<Photon*> nodePhotons; //all the photons in that node,
-                                //if empty then the node has more sub-nodes
+    std::vector<Photon*> nodePhotons_Indirect;//all the photons in that node that were stored on the indirect map,
+    std::vector<Photon*> nodePhotons_Caustic; //all the photons in that node that were store on the caustic map,
+                                              //if empty then the node has more sub-nodes
     std::vector<KdNode*> children;
+};
+
+struct BucketSplit
+{
+    int difference;
+    Bounds3f greaterThanSide;
+    Bounds3f lessThanSide;
 };
 
 
@@ -18,26 +26,30 @@ KdTree::KdTree(const Scene &scene, std::vector<std::vector<Photon *> *> &indirec
     timer.start();
 
     KdNode* node = new KdNode();
-    node->bounds = scene.bounds;
+    node->bounds = Bounds3f(); // not equating to the scene_bounds obtained from the BVH
+    //because the entire scene may not be lit, in which case youre biasing the tree in
+    //terms of space division
 
     for(int i=0; i<indirectMap.size(); i++)
     {
         for(int j=0; j<indirectMap[i]->size(); j++)
         {
-            node->nodePhotons.push_back((*indirectMap[i])[j]);
+            node->nodePhotons_Indirect.push_back((*indirectMap[i])[j]);
+            node->bounds = Union( node->bounds, (*indirectMap[i])[j]->position );
         }
     }
+
     for(int i=0; i<causticMap.size(); i++)
     {
         for(int j=0; j<causticMap[i]->size(); j++)
         {
-            node->nodePhotons.push_back((*indirectMap[i])[j]);
+            node->nodePhotons_Caustic.push_back((*causticMap[i])[j]);
+            node->bounds = Union( node->bounds, (*causticMap[i])[j]->position );
         }
     }
 
     int depth = 0;
-    int count = 0;
-
+    constructHelper( node, depth );
     root = node;
 
     int timeElapsed = timer.elapsed();
@@ -45,9 +57,185 @@ KdTree::KdTree(const Scene &scene, std::vector<std::vector<Photon *> *> &indirec
     std::cout<< "kd Tree construction Time: " + s + " milliseconds" <<std::endl;
 }
 
-void constructHelper( glm::vec3 bv_min, glm::vec3 bv_max,
-                      KdTree* parent_node, int& depth,
-                      int &count )
+void KdTree::constructHelper( KdNode* parent_node, int& depth )
 {
+    depth++;
 
+    //find the longest axis and use 12 dividing lines(13 buckets) to compare the photon count around
+    int nSegments = 12;
+
+    Bounds3f tmpCB(parent_node->bounds.min, parent_node->bounds.max);
+    int longest_axis = tmpCB.MaximumExtent();
+
+    float line = tmpCB.max[longest_axis] - tmpCB.min[longest_axis];
+    float division_line = 0.0f;
+
+    //50% binary tree
+    int cost_array_length = nSegments-1;
+    BucketSplit bucketSplits[cost_array_length];
+
+    SegregatePhotons(nSegments, division_line, line, longest_axis, tmpCB, parent_node, bucketSplits);
+
+    int minDifference = std::numeric_limits<int>::infinity();
+    int optimalSplitLine = -1;
+
+    for( int i=0; i<nSegments; i++ )
+    {
+        if( bucketSplits[i].difference < minDifference )
+        {
+            minDifference = bucketSplits[i].difference;
+            optimalSplitLine = i;
+        }
+    }
+
+    if(optimalSplitLine == -1) //Will this case even occur?
+                               //Photons are all just points in space,
+                               //not arbitrary shapes with area
+    {
+        int count =0;
+        while( count<2 && optimalSplitLine==-1 )
+        {
+            count++;
+            longest_axis++;
+            longest_axis = longest_axis%3;
+            float line = tmpCB.max[longest_axis] - tmpCB.min[longest_axis];;
+
+            SegregatePhotons(nSegments, division_line, line, longest_axis, tmpCB, parent_node, bucketSplits);
+
+            for( int i=0; i<nSegments; i++ )
+            {
+                if( bucketSplits[i].difference < minDifference )
+                {
+                    minDifference = bucketSplits[i].difference;
+                    optimalSplitLine = i;
+                }
+            }
+        }
+    }
+
+    if(optimalSplitLine == -1)
+    {
+        return;
+    }
+
+    if( (parent_node->nodePhotons_Indirect.size() + parent_node->nodePhotons_Caustic.size())>maxPhotonsInNode )
+    {
+        KdNode* node1 = new KdNode();
+        KdNode* node2 = new KdNode();
+
+        node1->bounds = bucketSplits[optimalSplitLine].greaterThanSide;
+        node2->bounds = bucketSplits[optimalSplitLine].lessThanSide;
+
+        division_line = tmpCB.min[longest_axis] + line*(optimalSplitLine/12.0f);
+
+        for( int i=0; i<parent_node->nodePhotons_Indirect.size(); i++ )
+        {
+            Photon* p = parent_node->nodePhotons_Indirect[i];
+            if( p->position[longest_axis] >= division_line )
+            {
+                node1->nodePhotons_Indirect.push_back(p);
+            }
+            else
+            {
+                node2->nodePhotons_Indirect.push_back(p);
+            }
+        }
+
+        for( int i=0; i<parent_node->nodePhotons_Caustic.size(); i++ )
+        {
+            Photon* p = parent_node->nodePhotons_Caustic[i];
+            if( p->position[longest_axis] >= division_line )
+            {
+                node1->nodePhotons_Caustic.push_back(p);
+            }
+            else
+            {
+                node2->nodePhotons_Caustic.push_back(p);
+            }
+        }
+
+        parent_node->nodePhotons_Indirect.clear();
+        parent_node->nodePhotons_Caustic.clear();
+
+        if( (node1->nodePhotons_Indirect.size() + node1->nodePhotons_Caustic.size())>maxPhotonsInNode )
+        {
+            parent_node->children.push_back(node1);
+            constructHelper( node1, depth );
+        }
+        else //if( (node1->nodePhotons_Indirect.size() + node1->nodePhotons_Caustic.size())==maxPhotonsInNode )
+        {
+            parent_node->nodePhotons_Indirect.insert(std::end(parent_node->nodePhotons_Indirect),
+                                                          std::begin(node1->nodePhotons_Indirect),
+                                                            std::end(node1->nodePhotons_Indirect));
+            parent_node->nodePhotons_Indirect.insert(std::end(parent_node->nodePhotons_Caustic),
+                                                          std::begin(node1->nodePhotons_Caustic),
+                                                            std::end(node1->nodePhotons_Caustic));
+        }
+
+        if( (node2->nodePhotons_Indirect.size() + node2->nodePhotons_Caustic.size())>maxPhotonsInNode )
+        {
+            parent_node->children.push_back(node2);
+            constructHelper( node2, depth );
+        }
+        else
+        {
+            parent_node->nodePhotons_Indirect.insert(std::end(parent_node->nodePhotons_Indirect),
+                                                          std::begin(node2->nodePhotons_Indirect),
+                                                            std::end(node2->nodePhotons_Indirect));
+            parent_node->nodePhotons_Indirect.insert(std::end(parent_node->nodePhotons_Caustic),
+                                                          std::begin(node2->nodePhotons_Caustic),
+                                                            std::end(node2->nodePhotons_Caustic));
+        }
+
+        return;
+    }
+    else
+    {
+        //terminate and create a leafNode with the current parnetNode
+        parent_node->children.clear();
+        return;
+    }
+}
+
+void KdTree::SegregatePhotons(int& nSegments, float& division_line, float& line,
+                              int& longest_axis, Bounds3f& tmpCB, KdNode* parent_node,
+                              BucketSplit& bucketSplits)
+{
+    for( int j=1; j<nSegments; j++ )
+    {
+        Bounds3f b0 = Bounds3f(), b1 = Bounds3f();
+        int count0 = 0, count1 = 0;
+        division_line = tmpCB.min[longest_axis] + line*(j/12.0f);
+
+        for( int i=0; i<parent_node->nodePhotons_Indirect.size(); i++ )
+        {
+            Photon* p = parent_node->nodePhotons_Indirect[i];
+            LeftOrRightofDivisionLine( p, longest_axis, division_line, count0, count1, b0, b1);
+        }
+
+        for( int i=0; i<parent_node->nodePhotons_Caustic.size(); i++ )
+        {
+            Photon* p = parent_node->nodePhotons_Caustic[i];
+            LeftOrRightofDivisionLine( p, longest_axis, division_line, count0, count1, b0, b1);
+        }
+
+        bucketSplits[j-1].difference = std::abs(count1 - count0);
+        bucketSplits[j-1].greaterThanSide = b0;
+        bucketSplits[j-1].lessThanSide = b1;
+    }
+}
+
+void KdTree::LeftOrRightofDivisionLine( Photon* p, int& longest_axis, float& division_line,
+                                        int& count0, int& count1, Bounds3f& b0, Bounds3f& b1)
+{
+    if( p->position[longest_axis] >= division_line )
+    {
+        count0++;
+        b0 = Union( b0, p->position );
+    }
+    else
+    {
+        count1++;
+        b1 = Union( b1, p->position );
+    }
 }
