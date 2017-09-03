@@ -7,6 +7,15 @@ float SquarePlane::Area() const
     return scale.x*scale.y;
 }
 
+Point3f SquarePlane::getPointOnSurface(const Point2f &xi) const
+{
+    Point3f pObj = Point3f(xi[0]-0.5f, xi[1]-0.5f, 0.0f);
+    Point3f p = Point3f(transform.T() * glm::vec4(pObj.x, pObj.y, pObj.z, 1.0f));
+    p += glm::normalize((transform.invTransT()*Normal3f(0,0,1))) * RayEpsilon;
+
+    return p;
+}
+
 Bounds3f SquarePlane::WorldBound() const
 {
     Bounds3f b = Bounds3f();

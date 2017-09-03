@@ -2,6 +2,8 @@
 #include <la.h>
 #include <tinyobj/tiny_obj_loader.h>
 #include <iostream>
+#include <math.h>
+#include <warpfunctions.h>
 
 Bounds3f Triangle::WorldBound() const
 {
@@ -21,6 +23,12 @@ Bounds3f Triangle::WorldBound() const
 float Triangle::Area() const
 {
     return glm::length(glm::cross(points[0] - points[1], points[2] - points[1])) * 0.5f;
+}
+
+Point3f Triangle::getPointOnSurface(const Point2f &xi) const
+{
+    //need to create a warpfunction for square to triangle to make this work correctly
+    return Point3f(transform.T() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 }
 
 Triangle::Triangle(const glm::vec3 &p1, const glm::vec3 &p2, const glm::vec3 &p3):

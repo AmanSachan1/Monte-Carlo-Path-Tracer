@@ -58,11 +58,10 @@ SOURCES += \
     $$PWD/scene/kdtree.cpp \
     $$PWD/scene/materials/orennayerbrdf.cpp \
     $$PWD/scene/thinlenscamera.cpp \
-    $$PWD/scene/mediums/homogeneousmedia.cpp \
     $$PWD/scene/noise.cpp \
-    $$PWD/scene/mediums/heterogeneousmedia.cpp \
     $$PWD/scene/geometry/implicit.cpp \
-    $$PWD/scene/photons.cpp
+    $$PWD/scene/photons.cpp \
+    $$PWD/scene/medium.cpp
 
 HEADERS += \
     $$PWD/mainwindow.h \
@@ -120,10 +119,8 @@ HEADERS += \
     $$PWD/integrators/photonmappingintegrator.h \
     $$PWD/scene/kdtree.h \
     $$PWD/scene/materials/orennayerbrdf.h \
-    $$PWD/scene/mediums/medium.h \
     $$PWD/scene/thinlenscamera.h \
-    $$PWD/scene/mediums/homogeneousmedia.h \
     $$PWD/scene/noise.h \
-    $$PWD/scene/mediums/heterogeneousmedia.h \
     $$PWD/scene/geometry/implicit.h \
-    $$PWD/scene/photons.h
+    $$PWD/scene/photons.h \
+    $$PWD/scene/medium.h

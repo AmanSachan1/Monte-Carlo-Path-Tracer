@@ -53,11 +53,10 @@ INPUT(
 ./release\kdtree.o
 ./release\orennayerbrdf.o
 ./release\thinlenscamera.o
-./release\homogeneousmedia.o
 ./release\noise.o
-./release\heterogeneousmedia.o
 ./release\implicit.o
 ./release\photons.o
+./release\medium.o
 ./release\qrc_glsl.o
 ./release\qrc_sfx.o
 ./release\qrc_darkorange.o

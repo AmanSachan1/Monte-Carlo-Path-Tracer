@@ -42,6 +42,9 @@ public:
     // respect to area on the surface.
     virtual Intersection Sample(const Point2f &xi, Float *pdf) const = 0;
 
+    //Get a point on the surface of the light in accordance to some warping function
+    virtual Point3f getPointOnSurface(const Point2f &xi) const = 0;
+
     float Pdf(const Intersection &ref, const Vector3f &wi) const;
 
     virtual Bounds3f WorldBound() const = 0;

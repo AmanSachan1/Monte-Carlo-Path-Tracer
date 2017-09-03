@@ -1,4 +1,5 @@
 #include "implicit.h"
+#include "warpfunctions.h"
 
 Bounds3f Implicit::WorldBound() const
 {
@@ -12,6 +13,18 @@ Bounds3f Implicit::WorldBound() const
 float Implicit::Area() const
 {
     return 0;
+}
+
+Point3f Implicit::getPointOnSurface(const Point2f &xi) const
+{
+    //because you would have to redefine this for every new implicit function you write
+    //assume theres a bounding sphere enclosing the implicit surface
+    //use the bounding sphere as the proxy for the surface
+    Point3f pObj = WarpFunctions::squareToSphereUniform(xi);
+    Point3f p = Point3f(transform.T() * glm::vec4(pObj.x, pObj.y, pObj.z, 1.0f));
+    p += glm::normalize( transform.invTransT() *pObj ) * RayEpsilon;
+
+    return p;
 }
 
 // Tanglecube

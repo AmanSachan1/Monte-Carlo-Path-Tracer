@@ -17,6 +17,17 @@ Color3f DiffuseAreaLight::LightEmitted() const
     return emittedLight;
 }
 
+Ray DiffuseAreaLight::createPhotonRay( std::shared_ptr<Sampler> sampler ) const
+{
+    Vector3f origin = shape->getPointOnSurface(sampler->Get2D());
+
+    glm::vec4 pos = transform.T()*glm::vec4(0.0,0.0,0.0,1.0);
+    Vector3f dir = origin - Vector3f(pos.x,pos.y,pos.z);
+    dir = glm::normalize(dir);
+    Ray ray = Ray(origin, dir);
+    return ray;
+}
+
 Color3f DiffuseAreaLight::Sample_Li(const Intersection &ref, const Point2f &xi,
                                      Vector3f *wi, Float *pdf) const
 {

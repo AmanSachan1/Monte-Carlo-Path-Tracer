@@ -38,7 +38,7 @@ public:
                         // in order for our class to be compatible with a QThreadPool.
     virtual void shoot(); //Called from run() for multi threading
 
-    KdNode *createTree(KdTree *kdTree);
+    KdNode *createTree(KdTree*& kdTree);
     void shootPhotons();
     void shootPhotonsHelper(const Scene& scene, std::shared_ptr<Sampler> sampler,
                             int depth, Ray& ray,  int &lightIndex, float alpha,

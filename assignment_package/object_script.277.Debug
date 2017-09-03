@@ -53,11 +53,10 @@ INPUT(
 ./debug\kdtree.o
 ./debug\orennayerbrdf.o
 ./debug\thinlenscamera.o
-./debug\homogeneousmedia.o
 ./debug\noise.o
-./debug\heterogeneousmedia.o
 ./debug\implicit.o
 ./debug\photons.o
+./debug\medium.o
 ./debug\qrc_glsl.o
 ./debug\qrc_sfx.o
 ./debug\qrc_darkorange.o

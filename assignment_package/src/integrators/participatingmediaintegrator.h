@@ -2,6 +2,7 @@
 #include "integrator.h"
 #include "directlightingintegrator.h"
 #include <scene/lights/light.h>
+#include <scene/medium.h>
 
 //Similar to the FullLighting Integrator except that it has can handle participating media in the scene.
 
@@ -24,9 +25,10 @@ public:
     Color3f IndirectLightingRayMarched(const Scene &scene, std::shared_ptr<Sampler> sampler, int &numLights,
                                        Point3f &point, float &offset, float &stepsize, const Ray &ray) const;
 
+    // Estimate lighting using MIS
+    Color3f EstimateDirectLighting(const Ray &r, const Scene &scene, std::shared_ptr<Sampler> &sampler, Intersection &intersection) const;
+
     bool RussianRoulette(Color3f &energy, float probability, int depth) const;
     float BalanceHeuristic(int nf, Float fPdf, int ng, Float gPdf) const;
     float PowerHeuristic(int nf, Float fPdf, int ng, Float gPdf) const;
 };
-
-

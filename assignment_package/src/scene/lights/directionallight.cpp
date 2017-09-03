@@ -23,3 +23,12 @@ Color3f DirectionalLight::L(const Intersection &isect, const Vector3f &w) const
 {
     return Color3f(0.f);
 }
+
+Ray DirectionalLight::createPhotonRay( std::shared_ptr<Sampler> sampler ) const
+{
+    glm::vec4 pos = transform.T()*glm::vec4(0.0,0.0,0.0,1.0);
+    Vector3f origin = Vector3f(pos.x, pos.y, pos.z);
+    Vector3f dir = wLight;
+    Ray ray = Ray(origin, dir);
+    return ray;
+}

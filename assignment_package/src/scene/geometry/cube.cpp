@@ -1,10 +1,20 @@
 #include "cube.h"
 #include <iostream>
+#include "warpfunctions.h"
 
 float Cube::Area() const
 {
     //TODO
     return 0;
+}
+
+Point3f Cube::getPointOnSurface(const Point2f &xi) const
+{
+    //get a point on a sphere centered at the origin and approximate its position to one of the faces of the cube
+//    Point3f pObj = WarpFunctions::squareToSphereUniform(xi);
+
+    return Point3f(transform.T() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)); //this is a giberish value; its just the center of the cube
+                            //come back later and implement the actual function --> wont have cube lights until then (NOT a priority)
 }
 
 Bounds3f Cube::WorldBound() const

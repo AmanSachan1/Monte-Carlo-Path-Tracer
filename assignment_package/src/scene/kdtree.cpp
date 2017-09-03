@@ -27,6 +27,8 @@ KdTree::KdTree(const Scene &scene, std::vector<std::vector<Photon *> *> &indirec
     QTime timer = QTime();
     timer.start();
 
+    maxPhotonsInNode = 50;
+
     KdNode* node = new KdNode();
     node->parent = nullptr;
     node->bounds = Bounds3f(); // not equating to the scene_bounds obtained from the BVH
@@ -79,14 +81,14 @@ void KdTree::constructHelper( KdNode* parent_node, int& depth )
 
     SegregatePhotons(nSegments, division_line, line, longest_axis, tmpCB, parent_node, bucketSplits);
 
-    int minDifference = std::numeric_limits<int>::infinity();
+    float minDifference = std::numeric_limits<float>::infinity();
     int optimalSplitLine = -1;
 
     for( int i=0; i<nSegments; i++ )
     {
-        if( bucketSplits[i].difference < minDifference )
+        if( ((float)bucketSplits[i].difference) < minDifference )
         {
-            minDifference = bucketSplits[i].difference;
+            minDifference = (float)bucketSplits[i].difference;
             optimalSplitLine = i;
         }
     }
@@ -300,4 +302,44 @@ void KdTree::checkChildren( std::vector<KdNode*>&nodeList, KdNode* testnode, Vec
             checkChildren( nodeList, testnode->children[i], encompassingSphereMin, encompassingSphereMax);
         }
     }
+}
+
+Color3f KdTree::BlendPhotons(std::vector<KdNode*> &nodeList, Vector3f &position)
+{
+    Color3f averagedColor = Color3f(0.0f);
+    int count = 0;
+    for(int i=0; i<nodeList.size(); i++)
+    {
+        for(int j=0; j<nodeList[i]->nodePhotons_Indirect.size(); j++)
+        {
+            Photon* photon = nodeList[i]->nodePhotons_Indirect[j];
+            if(WithinSearchRadius( photon->position, position ))
+            {
+                averagedColor += photon->color;
+                count ++;
+            }
+        }
+
+        for(int j=0; j<nodeList[i]->nodePhotons_Caustic.size(); j++)
+        {
+            Photon* photon = nodeList[i]->nodePhotons_Caustic[j];
+            if(WithinSearchRadius( photon->position, position ))
+            {
+                averagedColor += photon->color;
+                count ++;
+            }
+        }
+    }
+
+    averagedColor /= count;
+}
+
+bool KdTree::WithinSearchRadius( Vector3f& photonPos, Vector3f& testpoint)
+{
+    if((photonPos.x < testpoint.x + searchRadius) && (photonPos.y < testpoint.y + searchRadius) && (photonPos.z < testpoint.z + searchRadius) &&
+       (photonPos.x > testpoint.x - searchRadius) && (photonPos.y > testpoint.y - searchRadius) && (photonPos.z > testpoint.z - searchRadius))
+    {
+        return true;
+    }
+    return false;
 }

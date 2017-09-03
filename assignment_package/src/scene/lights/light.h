@@ -29,6 +29,8 @@ class Light
 
     virtual Color3f LightEmitted() const = 0;
 
+    virtual Ray createPhotonRay( std::shared_ptr<Sampler> sampler ) const = 0;
+
     QString name; // For debugging
     bool flag_infiniteLight;
     const Transform transform;
