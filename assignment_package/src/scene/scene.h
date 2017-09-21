@@ -4,7 +4,7 @@
 #include <scene/camera.h>
 #include <scene/lights/light.h>
 #include <scene/geometry/shape.h>
-#include <scene/medium.h>
+#include <scene/mediums/medium.h>
 #include <scene/photons.h>
 #include "bvh.h"
 #include "scene/kdtree.h"
@@ -25,10 +25,8 @@ public:
     QList<std::shared_ptr<Material>> materials;
     QList<std::shared_ptr<Light>> lights;
     Camera camera;
-    std::shared_ptr<Medium> medium;
+    std::shared_ptr<Medium> medium;;
     Bounds3f bounds;
-
-    bool hasMedium;
 
     Film film;
 

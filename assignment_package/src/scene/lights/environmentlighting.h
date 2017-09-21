@@ -2,7 +2,6 @@
 
 #include "light.h"
 #include <src/scene/materials/material.h>
-#include <warpfunctions.h>
 
 class EnvironmentLight: public Light
 {
@@ -20,7 +19,6 @@ public:
     virtual float Pdf_Li(const Intersection &ref, const Vector3f &wi) const;
 
     Color3f LightEmitted() const;
-    Ray createPhotonRay(std::shared_ptr<Sampler> sampler ) const;
 
     // Member variables
     float intensity;

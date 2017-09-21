@@ -14,20 +14,6 @@ Color3f Spotlight::LightEmitted() const
     return emittedLight;
 }
 
-Ray Spotlight::createPhotonRay( std::shared_ptr<Sampler> sampler ) const
-{
-    Vector3f origin = pLight;
-
-    float thetaMin = std::acos(cosTotalWidth);
-    Point3f pObj = WarpFunctions::squareToSphereCapUniform(sampler->Get2D(), thetaMin);
-    Point3f p = Point3f(transform.T() * glm::vec4(pObj.x, pObj.y, pObj.z, 1.0f));
-    p += glm::normalize( transform.invTransT() *pObj ) * RayEpsilon;
-    Vector3f dir = Vector3f(0.0f);
-
-    Ray ray = Ray(origin, dir);
-    return ray;
-}
-
 float Spotlight::Falloff(const Vector3f &w) const
 {
     Vector3f wl = glm::normalize( glm::vec3(transform.invT() * glm::vec4(w, 0.0f)) );

@@ -9,15 +9,6 @@ float Disc::Area() const
     return Pi*(r1*r2);
 }
 
-Point3f Disc::getPointOnSurface(const Point2f &xi) const
-{
-    Point3f point = WarpFunctions::squareToDiskConcentric(xi);
-    Point3f p = Point3f(transform.T()*glm::vec4(point,1.0f));
-    p += glm::normalize((transform.invTransT()*Normal3f(0,0,1))) * RayEpsilon;
-
-    return p;
-}
-
 Bounds3f Disc::WorldBound() const
 {
     Bounds3f b = Bounds3f();

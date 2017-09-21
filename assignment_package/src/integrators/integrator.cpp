@@ -47,6 +47,7 @@ void Integrator::Render()
     //We're done here! All pixels have been given an averaged color.
 }
 
+
 void Integrator::ClampBounds()
 {
     Point2i max = bounds.Max();

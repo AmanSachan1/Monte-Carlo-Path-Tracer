@@ -1,7 +1,6 @@
 #pragma once
 
 #include "light.h"
-#include <warpfunctions.h>
 
 class PointLight: public Light
 {
@@ -18,7 +17,6 @@ public:
      virtual float Pdf_Li(const Intersection &ref, const Vector3f &wi) const;
 
     Color3f LightEmitted() const;
-    Ray createPhotonRay(std::shared_ptr<Sampler> sampler ) const;
 
      // Member variables
      const Color3f emittedLight;

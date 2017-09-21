@@ -182,7 +182,7 @@ Color3f FullLightingIntegrator::Li(const Ray &ray, const Scene &scene, std::shar
         }
 
         flag_CameFromSpecular = false;
-        if(flag_Hit_Specular)
+        if(flag_Hit_Specular) //if( (sampledType & BSDF_SPECULAR) == BSDF_SPECULAR )
         {
             flag_CameFromSpecular = true;
         }

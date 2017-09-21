@@ -397,21 +397,21 @@ void MyGL::RenderScene()
             Integrator* rt = nullptr;
             switch(integratorType)
             {
-                case FULL_LIGHTING:
-                    rt = new FullLightingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
-                    break;
-                case PHOTON_MAP_LIGHTING:
-                    rt = new PhotonMappingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
-                    break;
-                case PARTICIPATING_MEDIA_LIGHTING:
-                    rt = new ParticipatingMediaIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
-                    break;
-                case DIRECT_LIGHTING:
-                    rt = new DirectLightingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
-                    break;
-                case NAIVE_LIGHTING:
-                    rt = new NaiveIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
-                    break;
+            case DIRECT_LIGHTING:
+                rt = new DirectLightingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
+                break;
+            case FULL_LIGHTING:
+                rt = new FullLightingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
+                break;
+            case PARTICIPATING_MEDIA_LIGHTING:
+                rt = new ParticipatingMediaIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
+                break;
+            case PHOTON_MAP_LIGHTING:
+                rt = new PhotonMappingIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
+                break;
+            case NAIVE_LIGHTING:
+                rt = new NaiveIntegrator(tileBounds, &scene, sampler->Clone(seed), recursionLimit);
+                break;
             }
 #define MULTITHREAD // Comment this line out to be able to debug with breakpoints.
 #ifdef MULTITHREAD
@@ -511,19 +511,19 @@ void MyGL::slot_SetIntegratorType(int t)
     switch(t)
     {
     case 0:
-        integratorType = FULL_LIGHTING;
+        integratorType = NAIVE_LIGHTING;
         break;
     case 1:
-        integratorType = PHOTON_MAP_LIGHTING;
-        break;
-    case 2:
-        integratorType = PARTICIPATING_MEDIA_LIGHTING;
-        break;
-    case 3:
         integratorType = DIRECT_LIGHTING;
         break;
+    case 3:
+        integratorType = FULL_LIGHTING;
+        break;
     case 4:
-        integratorType = NAIVE_LIGHTING;
+        integratorType = PARTICIPATING_MEDIA_LIGHTING;
+        break;
+    case 5:
+        integratorType = PHOTON_MAP_LIGHTING;
         break;
     }
 }

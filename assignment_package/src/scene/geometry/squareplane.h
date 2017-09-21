@@ -15,7 +15,6 @@ public:
     // class of Shape than SquarePlane, you may assume that a SquarePlane
     // has been scaled uniformly when computing its surface area.
     virtual float Area() const;
-    virtual Point3f getPointOnSurface(const Point2f &xi) const;
 
     // Sample a point on the surface of the shape and return the PDF with
     // respect to area on the surface.

@@ -15,7 +15,9 @@
 #include <scene/lights/spotlight.h>
 #include <scene/lights/environmentlighting.h>
 
-#include <scene/medium.h>
+#include <scene/mediums/medium.h>
+#include <scene/mediums/homogeneousmedia.h>
+#include <scene/mediums/heterogeneousmedia.h>
 
 #include <iostream>
 
@@ -45,13 +47,10 @@ void JSONReader::LoadSceneFromFile(QFile &file, const QStringRef &local_path, Sc
             }
 
             //For Mediums -- volumetric rendering
-            if(sceneObj.contains(QString("hasMedium")))
+            if(sceneObj.contains(QString("medium")))
             {
-                scene.hasMedium = true;
-            }
-            else
-            {
-                scene.hasMedium = false;
+                _medium = sceneObj["medium"].toObject();
+                scene.medium = LoadMedium(_medium);
             }
 
             //load all materials in QMap with mtl name as key and Material itself as value
@@ -181,15 +180,12 @@ bool JSONReader::LoadGeometry(QJsonObject &geometry, QMap<QString, std::shared_p
         }
 
 //        //For Mediums -- volumetric rendering
-        if(geometry.contains(QString("hasMedium")))
-        {
-            primitive->hasMedium = true;
-            std::cout << primitive->name.toStdString() << std::endl;
-        }
-        else
-        {
-            primitive->hasMedium = false;
-        }
+//        if(geometry.contains(QString("medium")))
+//        {
+//            QJsonObject medium = geometry["medium"].toObject();
+//            primitive->medium = LoadMedium(medium);
+//            primitive->participatingMedia = true;
+//        }
 
         if(geometry.contains(QString("name"))) primitive->name = geometry["name"].toString();
         (*primitives).append(primitive);
@@ -468,33 +464,33 @@ Transform JSONReader::LoadTransform(QJsonObject &transform)
     return Transform(t, r, s);
 }
 
-//std::shared_ptr<Medium> JSONReader::LoadMedium( QJsonObject &medium )
-//{
-//    QString type;
-//    std::shared_ptr<Medium> m;
+std::shared_ptr<Medium> JSONReader::LoadMedium( QJsonObject &medium )
+{
+    QString type;
+    std::shared_ptr<Medium> m;
 
-//    //First check what type of medium we're supposed to load
-//    if(medium.contains(QString("type"))) type = medium["type"].toString();
+    //First check what type of medium we're supposed to load
+    if(medium.contains(QString("type"))) type = medium["type"].toString();
 
-//    Float sigmaA = static_cast< float >(medium["sigmaA"].toDouble());
-//    Float sigmaS = static_cast< float >(medium["sigmaS"].toDouble());
-//    Float g = static_cast< float >(medium["g"].toDouble());
+    Float sigmaA = static_cast< float >(medium["sigmaA"].toDouble());
+    Float sigmaS = static_cast< float >(medium["sigmaS"].toDouble());
+    Float g = static_cast< float >(medium["g"].toDouble());
 
-//    if(QString::compare(type, QString("HomogeneousMedium")) == 0)
-//    {
-//        m = std::make_shared<HomogeneousMedia> (sigmaA, sigmaS, g);
-//    }
-//    else if(QString::compare(type, QString("HeterogeneousMedium")) == 0)
-//    {
-//        m = std::make_shared<HeterogeneousMedia> (sigmaA, sigmaS, g);
-//    }
-//    else
-//    {
-//        std::cout << "Could not parse the medium!" << std::endl;
-//    }
+    if(QString::compare(type, QString("HomogeneousMedium")) == 0)
+    {
+        m = std::make_shared<HomogeneousMedia> (sigmaA, sigmaS, g);
+    }
+    else if(QString::compare(type, QString("HeterogeneousMedium")) == 0)
+    {
+        m = std::make_shared<HeterogeneousMedia> (sigmaA, sigmaS, g);
+    }
+    else
+    {
+        std::cout << "Could not parse the medium!" << std::endl;
+    }
 
-//    return m;
-//}
+    return m;
+}
 
 glm::vec3 JSONReader::ToVec3(const QJsonArray &s)
 {

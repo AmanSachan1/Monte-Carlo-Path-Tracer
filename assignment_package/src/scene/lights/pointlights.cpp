@@ -16,19 +16,6 @@ Color3f PointLight::LightEmitted() const
     return emittedLight;
 }
 
-Ray PointLight::createPhotonRay( std::shared_ptr<Sampler> sampler ) const
-{
-    Vector3f origin = pLight;
-
-    Point3f pObj = WarpFunctions::squareToSphereUniform(sampler->Get2D());
-    Point3f p = Point3f(transform.T() * glm::vec4(pObj.x, pObj.y, pObj.z, 1.0f));
-    p += glm::normalize( transform.invTransT() *pObj ) * RayEpsilon;
-    Vector3f dir = glm::normalize(p);
-
-    Ray ray = Ray(origin, dir);
-    return ray;
-}
-
 float PointLight::Pdf_Li(const Intersection &ref, const Vector3f &wi) const
 {
     return 0.0f;

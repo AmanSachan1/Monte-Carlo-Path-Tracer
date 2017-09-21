@@ -31,6 +31,7 @@ public:
 
     virtual void Render(); // Called from run() or from MyGL depending on whether we're multithreading our render.
 
+
     // Evaluate the energy transmitted along the ray back to its origin, e.g. the camera or an intersection in the scene
     virtual Color3f Li(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler> sampler, int depth) const = 0;
 

@@ -19,18 +19,6 @@ Color3f EnvironmentLight::LightEmitted() const
     return emittedLight;
 }
 
-Ray EnvironmentLight::createPhotonRay( std::shared_ptr<Sampler> sampler ) const
-{
-    Point3f pObj = WarpFunctions::squareToSphereUniform(sampler->Get2D());
-    Point3f p = Point3f(transform.T() * glm::vec4(pObj.x, pObj.y, pObj.z, 1.0f));
-    p += glm::normalize( transform.invTransT() *pObj ) * RayEpsilon;
-    Vector3f origin = p;
-
-    Vector3f dir = glm::normalize(p - Vector3f(0.0f,0.0f,0.0f));
-    Ray ray = Ray(origin, dir);
-    return ray;
-}
-
 float EnvironmentLight::Pdf_Li(const Intersection &ref, const Vector3f &wi) const
 {
     return 1.0f;

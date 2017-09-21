@@ -26,10 +26,7 @@ public:
     void FindAllNeighborNodes( KdNode* originalNode, std::vector<KdNode*>&nodeList, Vector3f& pos, float& searchRadius );
     void checkChildren( std::vector<KdNode*>&nodeList, KdNode* testnode, Vector3f& encompassingSphereMin, Vector3f& encompassingSphereMax );
 
-    Color3f BlendPhotons(std::vector<KdNode*> &nodeList, Vector3f &position);
-    bool WithinSearchRadius( Vector3f& photonPos, Vector3f& testpoint);
     //members
     int maxPhotonsInNode;
-    float searchRadius;
     KdNode* root;
 };

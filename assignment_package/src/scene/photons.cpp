@@ -5,24 +5,20 @@ void Photons::run()
     shoot(); //using a proxy function to be able to easily debug by simply calling shoot instead of run
 }
 
-KdNode* Photons::createTree(KdTree*& kdTree)
+KdNode* Photons::createTree(KdTree* kdTree)
 {
     shootPhotons();
-    kdTree = new KdTree(*scene, photonListIndirect, photonListCaustic);
-    KdNode* root = kdTree->root;
-    return root;
+    KdTree* kdtree = new KdTree(*scene, photonListIndirect, photonListCaustic);
+    KdNode* root = kdtree->root;
 }
 
 void Photons::shootPhotons()
 {
-    numPhotons = 1000;
     for(int j=0; j<100; j++) //done to make it easy to convert to a parallel structure
     {
         //for every thread that is created, store the photons it is processing in a
         //separate std::vector and collate them all into one big list later
-
         run();
-//        shoot();
     }
 }
 
@@ -43,11 +39,13 @@ void Photons::shoot()
     for(int i=0; i<numLights; i++)
     {
         float alpha = scene->lights.at(i)->LightEmitted().length();//confirm with adam
-        for(int k=0; k<n2; k++)
+        for(int k=0; i<n2; i++)
         {
             //use warp functions to generate a ray from the light into the scene
-
-            Ray ray = scene->lights.at(i)->createPhotonRay(sampler);
+            WarpFunctions::squareToHemisphereCosine(sampler->Get2D());
+            Vector3f origin = Vector3f(0.0f);
+            Vector3f dir = Vector3f(0.0f);
+            Ray ray = Ray(origin, dir);
             shootPhotonsHelper(*scene, sampler, recursionLimit, ray, i, alpha,
                                threadPhotonListDirect,
                                threadPhotonListIndirect,

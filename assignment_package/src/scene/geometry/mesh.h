@@ -17,7 +17,6 @@ public:
     virtual void ComputeTriangleTBN(const Point3f& P, Normal3f* nor, Vector3f* tan, Vector3f* bit, const Point2f& uv) const;
 
     virtual float Area() const;
-    virtual Point3f getPointOnSurface(const Point2f &xi) const;
     virtual void InitializeIntersection(Intersection* isect, float t, Point3f pLocal) const;
 
     // Sample a point on the surface of the shape and return the PDF with
