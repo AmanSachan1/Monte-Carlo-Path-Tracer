@@ -61,16 +61,53 @@ public:
 
     bool Intersect(const Ray& r , float* t) const;
 
-    bool Contains(Vector3f& pos) const
-    {
-        if((pos.x>min.x && pos.y>min.y && pos.z>min.z) &&
-           (pos.x<max.x && pos.y<max.y && pos.z<max.z))
-        {
-            return true;
-        }
-
-        return false;
+    /*
+    //DELETEME
+    inline const Point3f& operator[](int i) const {
+        return (i == 0) ? min : max;
     }
+
+    //DELETEME
+    inline Point3f operator[](int i) {
+        return (i == 0) ? min : max;
+    }
+
+    //DELETEME
+    static inline Float gamma(int n) {
+        return (n *     std::numeric_limits<Float>::epsilon() * 0.5
+                ) / (1 - n *     std::numeric_limits<Float>::epsilon() * 0.5
+                     );
+    }
+
+    //DELETEME
+    inline bool IntersectP(const Ray &ray, const Vector3f &invDir,
+                           const int dirIsNeg[3]) const {
+        const Bounds3f &bounds = *this;
+        // Check for ray intersection against $x$ and $y$ slabs
+        Float tMin = (bounds[dirIsNeg[0]].x - ray.origin.x) * invDir.x;
+        Float tMax = (bounds[1 - dirIsNeg[0]].x - ray.origin.x) * invDir.x;
+        Float tyMin = (bounds[dirIsNeg[1]].y - ray.origin.y) * invDir.y;
+        Float tyMax = (bounds[1 - dirIsNeg[1]].y - ray.origin.y) * invDir.y;
+
+        // Update _tMax_ and _tyMax_ to ensure robust bounds intersection
+        tMax *= 1 + 2 * gamma(3);
+        tyMax *= 1 + 2 * gamma(3);
+        if (tMin > tyMax || tyMin > tMax) return false;
+        if (tyMin > tMin) tMin = tyMin;
+        if (tyMax < tMax) tMax = tyMax;
+
+        // Check for ray intersection against $z$ slab
+        Float tzMin = (bounds[dirIsNeg[2]].z - ray.origin.z) * invDir.z;
+        Float tzMax = (bounds[1 - dirIsNeg[2]].z - ray.origin.z) * invDir.z;
+
+        // Update _tzMax_ to ensure robust bounds intersection
+        tzMax *= 1 + 2 * gamma(3);
+        if (tMin > tzMax || tzMin > tMax) return false;
+        if (tzMin > tMin) tMin = tzMin;
+        if (tzMax < tMax) tMax = tzMax;
+        return (tMax > 0);
+    }
+    */    
 };
 
 Bounds3f Union(const Bounds3f& b1, const Bounds3f& b2);

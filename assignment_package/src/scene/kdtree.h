@@ -18,14 +18,9 @@ public:
     void constructHelper(KdNode* parent_node, int& depth);
     void SegregatePhotons(int& nSegments, float& division_line, float& line,
                           int& longest_axis, Bounds3f& tmpCB, KdNode* parent_node,
-                          BucketSplit bucketSplits[]);
+                          BucketSplit& bucketSplits);
     void LeftOrRightofDivisionLine( Photon* p, int& longest_axis, float& division_line,
                                     int& count0, int& count1, Bounds3f& b0, Bounds3f& b1);
-
-    KdNode* FindNode( Vector3f& pos );
-    void FindAllNeighborNodes( KdNode* originalNode, std::vector<KdNode*>&nodeList, Vector3f& pos, float& searchRadius );
-    void checkChildren( std::vector<KdNode*>&nodeList, KdNode* testnode, Vector3f& encompassingSphereMin, Vector3f& encompassingSphereMax );
-
     //members
     int maxPhotonsInNode;
     KdNode* root;
