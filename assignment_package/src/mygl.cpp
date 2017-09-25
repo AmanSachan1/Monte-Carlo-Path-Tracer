@@ -511,19 +511,19 @@ void MyGL::slot_SetIntegratorType(int t)
     switch(t)
     {
     case 0:
-        integratorType = NAIVE_LIGHTING;
-        break;
-    case 1:
-        integratorType = DIRECT_LIGHTING;
-        break;
-    case 3:
         integratorType = FULL_LIGHTING;
         break;
-    case 4:
+    case 1:
+        integratorType = PHOTON_MAP_LIGHTING;
+        break;
+    case 3:
         integratorType = PARTICIPATING_MEDIA_LIGHTING;
         break;
+    case 4:
+        integratorType = DIRECT_LIGHTING;
+        break;
     case 5:
-        integratorType = PHOTON_MAP_LIGHTING;
+        integratorType = NAIVE_LIGHTING;
         break;
     }
 }
