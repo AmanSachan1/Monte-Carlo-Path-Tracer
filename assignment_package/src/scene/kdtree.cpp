@@ -6,6 +6,8 @@ struct KdNode
     KdNode( Bounds3f bounds): bounds(bounds) {}
 
     Bounds3f bounds; // for the bounding box
+    KdNode* parent; //parent node of current node
+
     std::vector<Photon*> nodePhotons_Indirect;//all the photons in that node that were stored on the indirect map,
     std::vector<Photon*> nodePhotons_Caustic; //all the photons in that node that were store on the caustic map,
                                               //if empty then the node has more sub-nodes
@@ -26,6 +28,7 @@ KdTree::KdTree(const Scene &scene, std::vector<std::vector<Photon *> *> &indirec
     timer.start();
 
     KdNode* node = new KdNode();
+    node->parent = nullptr;
     node->bounds = Bounds3f(); // not equating to the scene_bounds obtained from the BVH
     //because the entire scene may not be lit, in which case youre biasing the tree in
     //terms of space division
@@ -123,6 +126,9 @@ void KdTree::constructHelper( KdNode* parent_node, int& depth )
         KdNode* node1 = new KdNode();
         KdNode* node2 = new KdNode();
 
+        node1->parent = parent_node;
+        node2->parent = parent_node;
+
         node1->bounds = bucketSplits[optimalSplitLine].greaterThanSide;
         node2->bounds = bucketSplits[optimalSplitLine].lessThanSide;
 
@@ -199,7 +205,7 @@ void KdTree::constructHelper( KdNode* parent_node, int& depth )
 
 void KdTree::SegregatePhotons(int& nSegments, float& division_line, float& line,
                               int& longest_axis, Bounds3f& tmpCB, KdNode* parent_node,
-                              BucketSplit& bucketSplits)
+                              BucketSplit bucketSplits[])
 {
     for( int j=1; j<nSegments; j++ )
     {
@@ -237,5 +243,61 @@ void KdTree::LeftOrRightofDivisionLine( Photon* p, int& longest_axis, float& div
     {
         count1++;
         b1 = Union( b1, p->position );
+    }
+}
+
+KdNode* KdTree::FindNode( Vector3f& pos )
+{
+    KdNode* encompassingNode;
+    KdNode* node = root;
+    while(node->children.size()>0)
+    {
+        for(int i=0; i<node->children.size(); i++)
+        {
+            if(node->children[i]->bounds.Contains(pos))
+            {
+                node = node->children[i];
+                //since photons are infintesmally small they can only be in one node
+                break; //therefore we can break out of the for loop
+            }
+        }
+    }
+
+    //node is now the lowest leaf of the kdTree that contains the photon
+    return node;
+}
+
+void KdTree::FindAllNeighborNodes( KdNode* originalNode, std::vector<KdNode*>&nodeList, Vector3f& pos, float& searchRadius )
+{
+    //now find all neighboring nodes that would be encompassed in the search radius
+    Vector3f encompassingSphereMin = Vector3f(pos.x - searchRadius, pos.y - searchRadius, pos.z - searchRadius);
+    Vector3f encompassingSphereMax = Vector3f(pos.x + searchRadius, pos.y + searchRadius, pos.z + searchRadius);
+    KdNode* encompassingNode = originalNode;
+
+    while(!(encompassingNode->bounds.Contains(encompassingSphereMin) && encompassingNode->bounds.Contains(encompassingSphereMax)))
+    {
+        if(encompassingNode->parent != nullptr)
+        {
+            encompassingNode = encompassingNode->parent;
+        }
+    }
+
+    //now we have the node that for sure encompasses the entire search radius
+    //successively check all of its children to see if they have any photons in them, if they do add them to the list
+    checkChildren(nodeList, encompassingNode, encompassingSphereMin, encompassingSphereMax);
+}
+
+void KdTree::checkChildren( std::vector<KdNode*>&nodeList, KdNode* testnode, Vector3f& encompassingSphereMin, Vector3f& encompassingSphereMax )
+{
+    if(testnode->nodePhotons_Caustic.size()>0 || testnode->nodePhotons_Indirect.size()>0)
+    {
+        nodeList.push_back(testnode);
+    }
+    for(int i=0; i<testnode->children.size(); i++)
+    {
+        if(testnode->children[i]->bounds.Contains(encompassingSphereMin) && testnode->children[i]->bounds.Contains(encompassingSphereMax))
+        {
+            checkChildren( nodeList, testnode->children[i], encompassingSphereMin, encompassingSphereMax);
+        }
     }
 }
