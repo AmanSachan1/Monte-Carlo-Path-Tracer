@@ -134,7 +134,7 @@
           "intensity" : 25,
           "transform" : {
             "translate" : [0,9.45,0],
-            "rotate" : [90,0,0],
+            "rotate" : [-90,0,0],
             "scale" : [5, 5, 1]
           },
           "isDelta" : false,

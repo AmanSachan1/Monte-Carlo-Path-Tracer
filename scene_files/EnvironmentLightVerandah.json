@@ -1,0 +1,82 @@
+{
+  "frames" :[
+    {
+    "frameNumber" : 0,
+    "scene" : {
+      "camera" : {
+        "target" : [0, 2.5, 0],
+        "eye" : [0, 5.5, -30],
+        "worldUp" : [0, 1, 0],
+        "fov" : 19.5,
+        "width" : 1024,
+        "height": 768
+      },
+      "primitives" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Sphere",
+          "material" : "perfectMirror",
+          "transform" : {
+            "translate" : [-5, 3.8, 3.5],
+            "rotate" : [0,0,0],
+            "scale" : [1.4, 1.4, 1.4]
+          }
+        },
+        {
+          "shape" : "Mesh",
+          "filename" : "../obj_files/buddha.obj",
+          "material" : "matteBuddha",
+          "transform" : {
+            "translate" : [-4.85, -2.25, 3],
+            "rotate" : [0,180,0],
+            "scale" : [0.5,0.5,0.5]
+          }
+        },
+        {
+          "shape" : "Cube",
+          "name" : "Cube",
+          "material" : "matteWhite",
+          "transform" : {
+            "translate" : [-5, -4.5, 3],
+            "rotate" : [0,37.5,0],
+            "scale" : [4.5, 4.5, 4.5]
+          }
+        }
+      ],
+      "lights" : [
+        {
+          "shape" : "Sphere",
+          "name" : "Environment Map",
+          "type" : "EnvironmentLight",
+          "transform" : {
+            "translate" : [0,0,0],
+            "rotate" : [0,0,0],
+            "scale" : [0.001, 0.001, 0.001]
+          },
+          "intensity" : 1.0,
+          "texture": "../tex_nor_maps/verandahHDR.jpeg"
+        }
+      ],
+      "materials" : [
+        {
+          "type": "MirrorMaterial",
+          "name": "perfectMirror",
+          "Kr": [1, 1, 1]
+        },
+        {
+        "type": "MirrorMaterial",
+          "name": "matteBuddha",
+          "Kr": [1, 1, 1],
+          "roughness": 0.05
+        },
+        {
+          "type" : "MatteMaterial",
+          "name" : "matteWhite",
+          "Kd" : [0.85, 0.81, 0.78],
+          "sigma": 0
+        }
+      ]
+    }
+  }
+]
+}
