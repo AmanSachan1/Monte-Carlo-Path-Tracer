@@ -89,6 +89,12 @@ A path tracer is one of the most obvious applications for multi-threading. Every
 
 ### Various BSDFs (Materials)
 
+![](./readme_images/TransmitBox_FullLighting_400Samples_depth10.png)
+
+![](./readme_images/Spectrum1_FullLighting_625Samples_depth10.png)
+
+![](./readme_images/rough specular fulllighting test.png)
+
 * __Microfacet BRDF:__ This BRDF mimics reflection by a material as if it was rough on a microscopic scale, so like most objects in the real world. Microfacet models allow us to make materials have a roughness parameter.
 * __Transmissive BTDF:__ This BSDF models the refraction of light through transmissive media, which leads interesting to caustics.
 * __Glass BSDF:__ Glass is unique as it consists of both reflective and refractive BxDFs.
