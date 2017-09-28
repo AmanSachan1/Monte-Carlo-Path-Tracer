@@ -69,15 +69,15 @@ At some point, I'd like to come back and properly tackle the complexity of volum
 
 ### Bounding Volume Hierarchy (BVH)
 
-![](./readme_images/Wahoo_FullLighting_625Samples_depth10.png)
-
 A BVH is a spatial acceleration structure that is super useful in path tracing. Without a BVH during the intersection testing stage, every ray would have to iterate over every single primitive in the scene to determine if it intersects with them or not. As your scene complexity increases this becomes an incredibly arduous task. 
 
 A BVH alleviates a whole bunch of these intersection tests by culling out the ones that definitly wont happen. A BVH takes all your primitives and arranges them in a possibly multi-branched tree. Each node of the tree has a bounding box that encapsulates all the nodes that are below it. The ray now performs intersection tests with the bounding boxes of the nodes. The leaf nodes actually contain primitves. The ray is essentially using bounding boxes as a filter and goes back to intersection testing with primitives if the node contains primitives. This way a ray initially tests against the entire scenes bounding box, assuming the ray is entering the scene, in the next intersection test the ray can disregard 50% or more of the primitves in the scene (if the number of branches in the tree is greater than 2, then at every level the tree disregards ((n-1)/n)% of the primitives in the scenes). All of this assumes we made a balanced BVH tree ofcourse.
 
 #### BVH results:
 
-At 5k triangles                                                                                                                               
+![](./readme_images/Wahoo_FullLighting_625Samples_depth10.png)
+
+Mario with 5k triangles                                                                                                                       
 With BVH at 1 sample/pixel: 4594 milliseconds                                                                                                 
 Without BVH at 1 sample/pixel: 454041 milliseconds                                                                                            
 Render Time Sped up 98.83347 times (or 9883.347% speed increase)                                                                              
