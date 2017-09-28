@@ -132,7 +132,7 @@ A Naive brute force approach to path tracing. This integrator takes a very long 
 
 If you compare the veach scene reults from direct and naive to full lighting you can see some of the differences that arise.
 
-![](./readme_images/VeachScene_Naive_900Samples_depth10.png)
+![](./readme_images/VeachScene_FullLighting_2500Samples_depth10.png)
 
 _Veach scene rendered with the full lighting integrator_
 
