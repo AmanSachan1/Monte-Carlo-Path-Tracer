@@ -93,7 +93,7 @@ A path tracer is one of the most obvious applications for multi-threading. Every
 
 ![](./readme_images/Spectrum1_FullLighting_625Samples_depth10.png)
 
-![](./readme_images/rough specular fulllighting test.png)
+![](./readme_images/roughSpecularFulllightingTest.png)
 
 * __Microfacet BRDF:__ This BRDF mimics reflection by a material as if it was rough on a microscopic scale, so like most objects in the real world. Microfacet models allow us to make materials have a roughness parameter.
 * __Transmissive BTDF:__ This BSDF models the refraction of light through transmissive media, which leads interesting to caustics.
@@ -103,12 +103,20 @@ A path tracer is one of the most obvious applications for multi-threading. Every
 
 ### Various Lights
 
+![](./readme_images/EnvironmentVerandah_1225Samples_Depth10.png)
+
+![](./readme_images/spotLightcornell.png)
+
+![](./readme_images/PointLightFull_NotcloseToObjects.png)
+
 * __Environment Map Lights:__ These are your typical skyboxes, but each point on the image that forms the skybox acts as a light source of that color. It is possible to Important Sample the pixels within the image for better and faster convergence, but I have not implemented that.
 * __Spot Lights:__ These are essentially point lights with a cone of effect. We can define the fall off and also change the spread of the cone of light.
 * __Point Lights:__ These can be thought of as infinitely small sphere lights. There is a drastice fall off in energy because of the way the pdf is modelled, and so if a point light is very close to objects in the scene, a portion of the object looks blown out.
 * __Diffuse Area Lights:__ Most common and easy to implement light source. It treats the shape of the light as a distribution of many point lights but without the blown out effect. 
 
 ### Direct Lighting Integrator
+
+![](./readme_images/VeachScene_DirectLighting_900Samples_depth10.png)
 
 The Direct Lighting Integrator has no Global Illumination because it simply ignores secondary bounces of the ray once it hits something in the scene. It is a part of Full Lighting Integration as it is essentially Light Important Sampling.
 
