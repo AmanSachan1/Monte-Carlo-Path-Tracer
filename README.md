@@ -1,13 +1,13 @@
-Path Tracer: Nights of the Final Project II - The Significant Parts
-======================
-
-**University of Pennsylvania, CIS 561: Advanced Computer Graphics, Final Project
-Part II**
+CPU Monte Carlo Path Tracer
+===========================
 
 * Name: Aman Sachan
-* PennKey: 20612513
+* Built from scratch for CIS 561: Advanced Computer Graphics at the Universoty of Pennsylvania
+
 ------------
 #README
+
+[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)
 
 ##Extra Credit:
 
