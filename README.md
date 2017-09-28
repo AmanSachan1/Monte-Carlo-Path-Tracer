@@ -60,13 +60,9 @@ A BVH alleviates a whole bunch of these intersection tests by culling out the on
 #### BVH results:
 
 At 5k triangles
-
 With BVH at 1 sample/pixel: 4594 milliseconds
-
 Without BVH at 1 sample/pixel: 454041 milliseconds
-
 Render Time Sped up 98.83347 times (or 9883.347% speed increase)
-
 BVH Construction Time For Wahoo.obj: 156 milliseconds
 
 ### Multi Threading
