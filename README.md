@@ -71,18 +71,18 @@ A path tracer is one of the most obvious applications for multi-threading. Every
 
 ### Various BSDFs (Materials)
 
-#### Microfacet BRDF
-#### Transmissive BTDF
-#### Glass BSDF
-#### Matte BSDF
-#### Mirror BSDF
+* __Microfacet BRDF:__ This BRDF mimics reflection by a material as if it was rough on a microscopic scale, so like most objects in the real world. Microfacet models allow us to make materials have a roughness parameter.
+* __Transmissive BTDF:__ This BSDF models the refraction of light through transmissive media, which leads interesting to caustics.
+* __Glass BSDF:__ Glass is unique as it consists of both reflective and refractive BxDFs.
+* __Matte BSDF:__ Matte BSDF can be though of as more complex lambert surfaces. This complexity arises from how they can be tuned to represent plastic but can also be tuned to look like the rubbery matte cover on your phone.
+* __Mirror BSDF:__ This material is a specular object with a roughness parameter, that comes from the microfacet BRDF, to control the reflection lobe.
 
 ### Various Lights
 
-#### Environment Map Lights
-#### Spot Lights
-#### Point Lights
-#### Diffuse Area Lights
+* __Environment Map Lights:__ These are your typical skyboxes, but each point on the image that forms the skybox acts as a light source of that color. It is possible to Important Sample the pixels within the image for better and faster convergence, but I have not implemented that.
+* __Spot Lights:__ These are essentially point lights with a cone of effect. We can define the fall off and also change the spread of the cone of light.
+* __Point Lights:__ These can be thought of as infinitely small sphere lights. There is a drastice fall off in energy because of the way the pdf is modelled, and so if a point light is very close to objects in the scene, a portion of the object looks blown out.
+* __Diffuse Area Lights:__ Most common and easy to implement light source. It treats the shape of the light as a distribution of many point lights but without the blown out effect. 
 
 ### Direct Lighting Integrator
 
