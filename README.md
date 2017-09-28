@@ -158,6 +158,8 @@ It is a technique employed to cut short the ray bounce depth once the energy bei
 
 ### Sampling Techniques
 
+![](./readme_images/stratified.png)
+
 A variety of sampling techniques were implemented for the various primitives and shapes that the path tracer deals with. All of these sampling techniques involved warping samples on a square plane to the shape in consideration. This way, I didn't have to implement a whole new sampling technique for every shape. This warping technique also allows for the introduction of biases such as cosine weighted sampling, in a controllable manner and from a common starting point.
 
 The samples on the square plane are generated in a "stratified uniform grid", which basically means that you generate uniform points for each grid cell of the square plane and then randomly jitter the samples within the grid cell. This avoids the banding and distinct boundaries 
