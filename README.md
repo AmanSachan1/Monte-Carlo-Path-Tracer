@@ -42,6 +42,8 @@ The color at every point in the scene is correctly scaled via Multiple Important
 
 ### Volumetric Integrator
 
+![](./readme_images/ParticipatingMedia.png)
+
 The Volumetric Integrator is just the Full Lighting but supports volumetric rendering of homogeneous media. A separate integrator had to be made because, I implemented volumetric rendering using ray marching.
 
 Homogeneous media is interesting to model because there are multiple ways to approach it. More realistic techniques include multiple scattering, easier techniques involve single scattering, and then there is ray marching which doesnt involve scattering the ray through the medium but rather evaluating the amount of light at each step of the ray march. 
@@ -49,6 +51,10 @@ Homogeneous media is interesting to model because there are multiple ways to app
 Raymarching makes the integrator slow because of all these extra evaluations for each ray. It also makes the render quality dependent upon the size of the ray march step. It also increases the variance in the scene. So, why would I use raymarching? Its the simplest to implement.
 
 There is an improved way to ray march which uses varying step sizes decided by the angular steps. Its called "Equiangular Sampling". Essentially, you vary the step size in accordance to the angular spread of the light you are important sampling. This way the raymarched points are spread out according to how they are lit (i.e. according to the energy that they recieve). Equiangular sampling reduces the high variance that can appear in ray marched scenes.
+
+![](./readme_images/participatingMedia_lowabsorption_highscattering.png)
+
+_this image would have lower variance and thus a gradual smooth falloff of energy from the light if equiangular sampling was used_
 
 Switching back to Volumetric Media, they are defined by 4 terms that define how they interact with light. These terms are: 
 
@@ -62,6 +68,8 @@ For heterogeneous media these properties are defined and vary at every point in 
 At some point, I'd like to come back and properly tackle the complexity of volumetric media in a better manner.
 
 ### Bounding Volume Hierarchy (BVH)
+
+![](./readme_images/Wahoo_FullLighting_625Samples_depth10.png)
 
 A BVH is a spatial acceleration structure that is super useful in path tracing. Without a BVH during the intersection testing stage, every ray would have to iterate over every single primitive in the scene to determine if it intersects with them or not. As your scene complexity increases this becomes an incredibly arduous task. 
 
