@@ -42,10 +42,10 @@ There is an improved way to ray march which uses varying step sizes decided by t
 
 Switching back to Volumetric Media, they are defined by 4 terms that define how they interact with light. These terms are: 
 
-#### In-scattering: How much light is scattered back into the medium, at some point in the medium.
-#### Out-scattering: How much light is scattered out of the medium, at some point in the medium.
-#### Absorption: How much light is absorbed at some point in the medium.
-#### Emission: How much light is emitted at some point in the medium. 
+#### * In-scattering: How much light is scattered back into the medium, at some point in the medium.
+#### * Out-scattering: How much light is scattered out of the medium, at some point in the medium.
+#### * Absorption: How much light is absorbed at some point in the medium.
+#### * Emission: How much light is emitted at some point in the medium. 
 
 For heterogeneous media these properties are defined and vary at every point in the medium, whereas homogeneous media have the same value for each of these properties at every point in the medium.
 
