@@ -118,17 +118,33 @@ A path tracer is one of the most obvious applications for multi-threading. Every
 
 ![](./readme_images/VeachScene_DirectLighting_900Samples_depth10.png)
 
+_Veach scene rendered with the direct lighting integrator_
+
 The Direct Lighting Integrator has no Global Illumination because it simply ignores secondary bounces of the ray once it hits something in the scene. It is a part of Full Lighting Integration as it is essentially Light Important Sampling.
 
 ### Naive Lighting Integrator
 
+![](./readme_images/VeachScene_Naive_900Samples_depth10.png)
+
+_Veach scene rendered with the naive integrator_
+
 A Naive brute force approach to path tracing. This integrator takes a very long time and a very large number of samples per pixel to converge upon an image. The major difference between naive and full lighting are the biases the that full lighting integrator uses to make the image converge orders of magnitude faster at a smaller sample per pixel count.
 
+If you compare the veach scene reults from direct and naive to full lighting you can see some of the differences that arise.
+
+![](./readme_images/VeachScene_Naive_900Samples_depth10.png)
+
+_Veach scene rendered with the full lighting integrator_
+
 ### Complex Implicit Surfaces
+
+![](./readme_images/implicit2.png)
 
 If an implicit surface can be defined by an equation equating to zero, it can define by a Signed Distance Field (SDF); I used SDF's during intersection tests to determine if we're inside, outside, or actually intersecting the object. In this way, we can create primitives out of implicit surfaces that can interact with the scene in the same way all other primitives do.
 
 ### Thin Lens Camera Model
+
+![](./readme_images/camera_thinlens4.png)
 
 Thin Convex Camera Lenses can be mimicked by having rays shot out from the camera pass through some point sampled on the lens and then using this point to change the original ray based on the properties of the lens. The technique is just an approximation for the actual math and produces better renders with more samples/pixel. At a high level the origin of the ray is shifted to from a sampled point on the camera lens, and the ray direction is changed depending upon the focal distance and thickness of the lens.
 
