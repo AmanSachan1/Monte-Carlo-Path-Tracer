@@ -20,9 +20,19 @@ Due to its accuracy and unbiased nature, path tracing is used to generate refere
 
 ### Full Lighting Integrator
 
+![](./readme_images/partyAnimals_900Samples_Depth10CorrectedLight.png)
+
 This integration scheme renders the scene based upon the Light Transport Equation but takes into account Multiple Important Sampling, Russian Roullete Termination, Conditionals for various types of light sources, and is implemented in an iterative rather than recursive manner. All these features let it avoid blown out images that can occur in the naive integrator, keep global illumination, terminate rays early with very little impact on the render quality, etc. These features introduce bias into the render but in a way that is barely noticeable so that renders still look realistic. The bias is hard to notice because it is mimicking  but approximating how light would actually bounce around and react in the scene; for example cosine weighted sampling introduces bias but is essentially just lamberts law in action. 
 
-### Multiple Important Sampling
+### Multiple Important Sampling (MIS)
+
+![](./readme_images/twolightsCornellWRONG.png) 
+
+_over blown image due to a lack of MIS_
+
+![](./readme_images/twolightsCornellCORRECT.png)
+
+_energy in the image is corrected with MIS_
 
 The path tracer introduces different biases for different scenes, to help make each of those scenes converge faster without deviating too much from the ground truth. These biases include light important sampling, BSDF important sampling, consine weighted sampling, etc. Instead of relying on anyone of these biased forms of sampling we get the best result across all kinds of scenes by taking a weighted average of them. The technique that does this is called Mulitple Important Sampling.
 
